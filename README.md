@@ -28,5 +28,5 @@ scripter -h, --help
 %[manager]% --change-stream %[music-stream]%
 ```
 
-Variables are accessed by enclosing them with `%[]%`, for example `%[var]%`
-Commandline arguments are accessed by `%[N]%`, where N is >= 1
+Variables are accessed by enclosing them with `%[]%`, for example `%[var]%`     
+Command-line arguments are accessed by `%[N]%`, where N is >= 1
