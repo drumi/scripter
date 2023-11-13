@@ -21,4 +21,12 @@ scripter -h, --help
     Lists help menu
 ```
 
+## Example Script
+```
+%[media]% play %[1]% -hq
+%[tracker]% register %[1]%
+%[manager]% --change-stream %[music-stream]%
+```
+
 Variables are accessed by enclosing them with `%[]%`, for example `%[var]%`
+Commandline arguments are accessed by `%[N]%`, where N is >= 1
