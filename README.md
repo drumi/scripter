@@ -11,7 +11,7 @@ scripter -l, --list <options>
 scripter -e, --execute <environment> <arg1> <arg2> ... <argN>
 	Executes script set in the <environment> with arguments passed as <argN>
 	
-scripter -c, --create 
+scripter -c, --create <environment>
 	Creates a new environment
 	
 scripter -d, --delete <options>
