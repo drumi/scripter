@@ -32,18 +32,18 @@ scripter -h, --help
 
 ## Example Usage
 ```
-scripter -c mediaEnv
+scripter -c media
 scripter -m -sgv player "C:\misc\MediaPlayer.exe"
-scripter -m -ss mediaEnv mediaScript.txt
-scripter -e mediaEnv song.mp3
+scripter -m -ss media script.txt
+scripter -e media song.mp3
 ```
 
 ## Example Script
 ```
-%[media]% play %[1]% -hq
-%[tracker]% register %[1]%
+%[player]% play --high-quality %[1]%
+%[tracker]% --register --no-remove %[1]%
 %[manager]% --change-stream %[music-stream]%
 ```
 
 Variables are accessed by enclosing them with `%[]%`, for example `%[var]%`     
-Command-line arguments are accessed by `%[N]%`, where N is >= 1
+Command-line arguments are accessed by `%[N]%`, where N >= 1
