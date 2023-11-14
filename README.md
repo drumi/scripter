@@ -2,7 +2,7 @@
 Small Windows utility tool to deal with repeating tasks.
 ## Commands
 ```
-scripter -c, --create 
+scripter -c, --create <environment> 
 	Creates a new environment
 	
 scripter -d, --delete <options>

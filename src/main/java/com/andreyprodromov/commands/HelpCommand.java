@@ -12,7 +12,7 @@ public final class HelpCommand implements Command {
     public void execute() {
         System.out.println(
             """
-            scripter -c, --create 
+            scripter -c, --create <environment>
                 Creates a new environment
                 
             scripter -d, --delete <options>
