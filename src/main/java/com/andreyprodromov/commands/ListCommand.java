@@ -18,7 +18,6 @@ public final class ListCommand implements Command {
 
     @Override
     public void execute() {
-
         var config = ConfigManager.get().getConfig();
         String command = args[COMMAND_TYPE_INDEX];
 
@@ -48,6 +47,12 @@ public final class ListCommand implements Command {
                 for (var e : env) {
                     System.out.println(e);
                 }
+            }
+            case "-s", "--script" -> {
+                String environmentName = args[COMMAND_TYPE_INDEX + 1];
+                var script = config.getScript(environmentName);
+
+                System.out.printf("Script for \"%s\":%n%s%n", environmentName, script);
             }
         }
     }
