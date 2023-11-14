@@ -6,7 +6,11 @@ public class App {
 
     public static void main(String[] args) {
         var handler = new DefaultHandler();
-        handler.handle(args);
+        try {
+            handler.handle(args);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }

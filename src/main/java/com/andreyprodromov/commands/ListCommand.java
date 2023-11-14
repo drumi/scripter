@@ -1,15 +1,17 @@
 package com.andreyprodromov.commands;
 
+import com.andreyprodromov.commands.exceptions.CommandDoesNotExistException;
 import com.andreyprodromov.environment.loaders.ConfigManager;
+import com.andreyprodromov.parser.Parser;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Set;
 
 public final class ListCommand implements Command {
 
     private static final int COMMAND_TYPE_INDEX = 1;
+
+    private final Parser parser = Parser.get();
     private final String args[];
 
     public ListCommand(String[] args) {
@@ -53,6 +55,20 @@ public final class ListCommand implements Command {
                 var script = config.getScript(environmentName);
 
                 System.out.printf("Script for \"%s\":%n%s%n", environmentName, script);
+            }
+            case "-ps", "--parsed-script" -> {
+                String environmentName = args[COMMAND_TYPE_INDEX + 1];
+                String script = parser.parse(
+                    environmentName,
+                    Arrays.copyOfRange(args, COMMAND_TYPE_INDEX + 2, args.length)
+                );
+
+                System.out.printf("Parsed script for \"%s\":%n%s%n", environmentName, script);
+            }
+            default -> {
+                throw new CommandDoesNotExistException(
+                    String.format("\"%s\" is not an existing option for --list command", command)
+                );
             }
         }
     }

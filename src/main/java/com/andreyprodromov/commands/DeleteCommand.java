@@ -1,5 +1,6 @@
 package com.andreyprodromov.commands;
 
+import com.andreyprodromov.commands.exceptions.CommandDoesNotExistException;
 import com.andreyprodromov.environment.loaders.ConfigManager;
 
 public final class DeleteCommand implements Command {
@@ -32,6 +33,11 @@ public final class DeleteCommand implements Command {
                 String environment = args[DELETION_TYPE_INDEX + 1];
 
                 config.deleteEnvironment(environment);
+            }
+            default -> {
+                throw new CommandDoesNotExistException(
+                    String.format("\"%s\" is not an existing option for --delete command", command)
+                );
             }
         }
 

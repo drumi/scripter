@@ -30,6 +30,7 @@ public final class HelpCommand implements Command {
                     -lv, --local-variables
                     -env, --environments
                     -s, --script <environment>
+                    -ps, --parsed-script <environment> <arg1> <arg2> ... <argN>
                 
             scripter -m, --modify <options>
                 Modifies environment, where <options> is one of the following:

@@ -1,5 +1,6 @@
 package com.andreyprodromov.commands;
 
+import com.andreyprodromov.commands.exceptions.CommandDoesNotExistException;
 import com.andreyprodromov.environment.loaders.ConfigManager;
 
 import java.io.IOException;
@@ -54,6 +55,11 @@ public final class ModifyCommand implements Command {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+            }
+            default -> {
+                throw new CommandDoesNotExistException(
+                    String.format("\"%s\" is not an existing option for --modify command", command)
+                );
             }
         }
 
