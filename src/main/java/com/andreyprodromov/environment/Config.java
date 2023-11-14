@@ -11,10 +11,10 @@ import java.util.Set;
 
 public class Config {
 
-    private Set<String> environments = new HashSet<>();
-    private Map<String, String> globalVariables = new HashMap<>();
-    private Map<String, Map<String, String>> localVariables = new HashMap<>();
-    private Map<String, String> scripts = new HashMap<>();
+    private final Set<String> environments = new HashSet<>();
+    private final Map<String, String> globalVariables = new HashMap<>();
+    private final Map<String, Map<String, String>> localVariables = new HashMap<>();
+    private final Map<String, String> scripts = new HashMap<>();
 
     public void createEnvironment(String environmentName) {
         environments.add(environmentName);
@@ -25,6 +25,17 @@ public class Config {
         environments.remove(environtmentName);
         localVariables.remove(environtmentName);
         scripts.remove(environtmentName);
+    }
+
+    public void deleteLocalVariable(String environtmentName, String variableName) {
+        var environmentVariables = localVariables.get(environtmentName);
+
+        if (environmentVariables != null)
+            environmentVariables.remove(variableName);
+    }
+
+    public void deleteGlobalVariable(String variableName) {
+        globalVariables.remove(variableName);
     }
 
     public Set<String> getEnvironments() {

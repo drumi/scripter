@@ -24,8 +24,11 @@ public final class HelpCommand implements Command {
             scripter -c, --create 
                 Creates a new environment
                 
-            scripter -d, --delete 
-                Deletes an environment if exists
+            scripter -d, --delete <options>
+                Deletes, where options is one of the following
+                    -gv, --global-variable <name>
+                    -lv, --local-variable <environment> <name>
+                    -env --environment <environment>
                 
             scripter -m, --modify <options>
                 Modifies environment, where <options> is one of the following:
