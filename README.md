@@ -42,8 +42,8 @@ scripter -e media song.mp3
 
 ## Example Script
 ```
-%[player]% play --high-quality %[1]%
-%[tracker]% --register --no-remove %[1]%
+%[player]% play --high-quality %[1]% &&
+%[tracker]% --register --no-remove %[1]% &&
 %[manager]% --change-stream %[music-stream]%
 ```
 
