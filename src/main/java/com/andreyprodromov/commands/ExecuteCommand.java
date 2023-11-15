@@ -1,19 +1,25 @@
 package com.andreyprodromov.commands;
 
-import com.andreyprodromov.parser.Parser;
+import com.andreyprodromov.parsers.Parser;
+import com.andreyprodromov.platform.Executor;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.Arrays;
 
 public final class ExecuteCommand implements Command {
 
     private static final int ENVIRONMENT_NAME_INDEX = 1;
 
-    private final Parser parser = Parser.get();
     private final String[] args;
+    private final Parser parser;
+    private final Executor executor;
 
-    public ExecuteCommand(String[] args) {
+    public ExecuteCommand(String[] args, Parser parser, Executor executor) {
         this.args = args;
+        this.parser = parser;
+        this.executor = executor;
     }
 
     @Override
@@ -23,14 +29,7 @@ public final class ExecuteCommand implements Command {
             environmentName, Arrays.copyOfRange(args, ENVIRONMENT_NAME_INDEX + 1, args.length)
         );
 
-        // Execute script
-        try {
-            System.out.println(parsedScript);
-            Runtime.getRuntime().exec(parsedScript);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+        executor.execute(parsedScript);
     }
 
 }

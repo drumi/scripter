@@ -1,15 +1,15 @@
-package com.andreyprodromov.environment;
+package com.andreyprodromov.runtime;
 
-import com.andreyprodromov.environment.exceptions.EnvironmentDoesNotExistException;
-import com.andreyprodromov.environment.exceptions.ScriptDoesNotExistException;
-import com.andreyprodromov.environment.exceptions.VariableIsNotSetException;
+import com.andreyprodromov.runtime.exceptions.EnvironmentDoesNotExistException;
+import com.andreyprodromov.runtime.exceptions.ScriptDoesNotExistException;
+import com.andreyprodromov.runtime.exceptions.VariableIsNotSetException;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class Config {
+public class RuntimeConfig {
 
     private final Set<String> environments = new HashSet<>();
     private final Map<String, String> globalVariables = new HashMap<>();
@@ -21,14 +21,14 @@ public class Config {
         localVariables.computeIfAbsent(environmentName, k -> new HashMap<>());
     }
 
-    public void deleteEnvironment(String environtmentName) {
-        environments.remove(environtmentName);
-        localVariables.remove(environtmentName);
-        scripts.remove(environtmentName);
+    public void deleteEnvironment(String environmentName) {
+        environments.remove(environmentName);
+        localVariables.remove(environmentName);
+        scripts.remove(environmentName);
     }
 
-    public void deleteLocalVariable(String environtmentName, String variableName) {
-        var environmentVariables = localVariables.get(environtmentName);
+    public void deleteLocalVariable(String environmentName, String variableName) {
+        var environmentVariables = localVariables.get(environmentName);
 
         if (environmentVariables != null)
             environmentVariables.remove(variableName);
@@ -48,7 +48,7 @@ public class Config {
 
     public void setLocalVariable(String environmentName, String variableName, String value) {
         if (!environments.contains(environmentName))
-            throw createEnvirontmentDoesNotExistException(environmentName);
+            throw createEnvironmentDoesNotExistException(environmentName);
 
         localVariables.get(environmentName)
                       .put(variableName, value);
@@ -56,7 +56,7 @@ public class Config {
 
     public void setScript(String environmentName, String script) {
         if (!environments.contains(environmentName))
-            throw createEnvirontmentDoesNotExistException(environmentName);
+            throw createEnvironmentDoesNotExistException(environmentName);
 
         scripts.put(environmentName, script);
     }
@@ -98,7 +98,7 @@ public class Config {
         return scripts.get(environmentName);
     }
 
-    private EnvironmentDoesNotExistException createEnvirontmentDoesNotExistException(String environmentName) {
+    private EnvironmentDoesNotExistException createEnvironmentDoesNotExistException(String environmentName) {
         return new EnvironmentDoesNotExistException(
             String.format("\"%s\" does not exist as an com.andreyprodromov.environment", environmentName)
         );

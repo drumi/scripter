@@ -1,22 +1,24 @@
 package com.andreyprodromov.commands;
 
 import com.andreyprodromov.commands.exceptions.CommandDoesNotExistException;
-import com.andreyprodromov.environment.loaders.ConfigManager;
+import com.andreyprodromov.runtime.loaders.RuntimeConfigManager;
 
 public final class DeleteCommand implements Command {
 
     private static final int DELETION_TYPE_INDEX = 1;
 
     private final String[] args;
+    private final RuntimeConfigManager runtimeConfigManager;
 
-    public DeleteCommand(String[] args) {
+    public DeleteCommand(String[] args, RuntimeConfigManager runtimeConfigManager) {
         this.args = args;
+        this.runtimeConfigManager = runtimeConfigManager;
     }
 
     @Override
     public void execute() {
         String command = args[DELETION_TYPE_INDEX];
-        var config = ConfigManager.get().getConfig();
+        var config = runtimeConfigManager.getConfig();
 
         switch (command) {
             case "-lv", "--local-variable" -> {
@@ -41,8 +43,7 @@ public final class DeleteCommand implements Command {
             }
         }
 
-        ConfigManager.get()
-                     .saveConfig();
+        runtimeConfigManager.saveConfig();
     }
 
 }

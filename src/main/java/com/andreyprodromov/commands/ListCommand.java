@@ -1,9 +1,11 @@
 package com.andreyprodromov.commands;
 
 import com.andreyprodromov.commands.exceptions.CommandDoesNotExistException;
-import com.andreyprodromov.environment.loaders.ConfigManager;
-import com.andreyprodromov.parser.Parser;
+import com.andreyprodromov.parsers.Parser;
+import com.andreyprodromov.runtime.loaders.RuntimeConfigManager;
 
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.Set;
 
@@ -11,16 +13,22 @@ public final class ListCommand implements Command {
 
     private static final int COMMAND_TYPE_INDEX = 1;
 
-    private final Parser parser = Parser.get();
     private final String args[];
+    private final Parser parser;
+    private final RuntimeConfigManager runtimeConfigManager;
+    private final PrintStream outputStream;
 
-    public ListCommand(String[] args) {
+
+    public ListCommand(String[] args, Parser parser, RuntimeConfigManager runtimeConfigManager, OutputStream outputStream) {
         this.args = args;
+        this.parser = parser;
+        this.runtimeConfigManager = runtimeConfigManager;
+        this.outputStream = new PrintStream(outputStream);
     }
 
     @Override
     public void execute() {
-        var config = ConfigManager.get().getConfig();
+        var config = runtimeConfigManager.getConfig();
         String command = args[COMMAND_TYPE_INDEX];
 
 
@@ -28,33 +36,33 @@ public final class ListCommand implements Command {
             case "-gv", "--global-variables" -> {
                 var variables = config.getAllGlobalVariables();
 
-                System.out.println("Global variables:");
+                outputStream.println("Global variables:");
                 for (var variable : variables.entrySet()) {
-                    System.out.println(variable.getKey() + ": " + variable.getValue());
+                    outputStream.println(variable.getKey() + ": " + variable.getValue());
                 }
             }
             case "-lv", "--local-variables" -> {
                 String envName = args[COMMAND_TYPE_INDEX + 1];
                 var variables = config.getAllLocalVariables(envName);
 
-                System.out.println("Local Variables for environment \"" + envName + "\":");
+                outputStream.println("Local Variables for environment \"" + envName + "\":");
                 for (var variable : variables.entrySet()) {
-                    System.out.println(variable.getKey() + ": " + variable.getValue());
+                    outputStream.println(variable.getKey() + ": " + variable.getValue());
                 }
             }
             case "-env", "--environments" -> {
                 Set<String> env = config.getEnvironments();
 
-                System.out.println("Environments:");
+                outputStream.println("Environments:");
                 for (var e : env) {
-                    System.out.println(e);
+                    outputStream.println(e);
                 }
             }
             case "-s", "--script" -> {
                 String environmentName = args[COMMAND_TYPE_INDEX + 1];
                 var script = config.getScript(environmentName);
 
-                System.out.printf("Script for \"%s\":%n%s%n", environmentName, script);
+                outputStream.printf("Script for \"%s\":%n%s%n", environmentName, script);
             }
             case "-ps", "--parsed-script" -> {
                 String environmentName = args[COMMAND_TYPE_INDEX + 1];
@@ -63,7 +71,7 @@ public final class ListCommand implements Command {
                     Arrays.copyOfRange(args, COMMAND_TYPE_INDEX + 2, args.length)
                 );
 
-                System.out.printf("Parsed script for \"%s\":%n%s%n", environmentName, script);
+                outputStream.printf("Parsed script for \"%s\":%n%s%n", environmentName, script);
             }
             default -> {
                 throw new CommandDoesNotExistException(

@@ -1,7 +1,7 @@
 package com.andreyprodromov.commands;
 
 import com.andreyprodromov.commands.exceptions.CommandDoesNotExistException;
-import com.andreyprodromov.environment.loaders.ConfigManager;
+import com.andreyprodromov.runtime.loaders.RuntimeConfigManager;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,15 +11,17 @@ public final class ModifyCommand implements Command {
 
     private static final int MODIFICATION_TYPE_INDEX = 1;
     private final String[] args;
+    private final RuntimeConfigManager runtimeConfigManager;
 
-    public ModifyCommand(String[] args) {
+    public ModifyCommand(String[] args, RuntimeConfigManager runtimeConfigManager) {
         this.args = args;
+        this.runtimeConfigManager = runtimeConfigManager;
     }
 
     @Override
     public void execute() {
         String command = args[MODIFICATION_TYPE_INDEX];
-        var config = ConfigManager.get().getConfig();
+        var config = runtimeConfigManager.getConfig();
 
         switch (command) {
             case "-slv", "--set-local-variable" -> {
@@ -63,9 +65,7 @@ public final class ModifyCommand implements Command {
             }
         }
 
-        ConfigManager.get()
-                     .saveConfig();
-
+        runtimeConfigManager.saveConfig();
     }
 
 }

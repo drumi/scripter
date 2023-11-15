@@ -1,17 +1,23 @@
-package com.andreyprodromov.parser;
+package com.andreyprodromov.parsers;
 
-import com.andreyprodromov.environment.Config;
-import com.andreyprodromov.environment.loaders.ConfigManager;
+import com.andreyprodromov.runtime.RuntimeConfig;
+import com.andreyprodromov.runtime.loaders.RuntimeConfigManager;
 
 public class DefaultParser implements Parser {
 
     private static final String VARIABLE_PREFIX = "%[";
     private static final String VARIABLE_SUFFIX = "]%";
 
+    private final RuntimeConfigManager runtimeConfigManager;
+
+    public DefaultParser(RuntimeConfigManager runtimeConfigManager) {
+        this.runtimeConfigManager = runtimeConfigManager;
+    }
+
     @Override
     public String parse(String environment, String[] args) {
-        Config config = ConfigManager.get().getConfig();
-        String script = config.getScript(environment);
+        RuntimeConfig runtimeConfig = runtimeConfigManager.getConfig();
+        String script = runtimeConfig.getScript(environment);
 
 
         // Put commandline arguments
@@ -32,7 +38,7 @@ public class DefaultParser implements Parser {
         while (startIndex != -1) {
             String variable = script.substring(startIndex + VARIABLE_PREFIX.length() , endIndex);
 
-            String valueOfVariable = config.getVariable(environment, variable);
+            String valueOfVariable = runtimeConfig.getVariable(environment, variable);
 
             script = script.replace(
                 VARIABLE_PREFIX + variable + VARIABLE_SUFFIX,

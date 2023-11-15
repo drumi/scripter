@@ -1,16 +1,21 @@
 package com.andreyprodromov.commands;
 
+import java.io.OutputStream;
+import java.io.PrintStream;
+
 public final class HelpCommand implements Command {
 
     private final String[] args;
+    private final PrintStream outputStream;
 
-    public HelpCommand(String[] args) {
+    public HelpCommand(String[] args, OutputStream outputStream) {
         this.args = args;
+        this.outputStream = new PrintStream(outputStream);
     }
 
     @Override
     public void execute() {
-        System.out.println(
+        outputStream.println(
             """
             scripter -c, --create <environment>
                 Creates a new environment

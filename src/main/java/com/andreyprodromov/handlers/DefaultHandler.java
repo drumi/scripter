@@ -1,13 +1,19 @@
 package com.andreyprodromov.handlers;
 
-import com.andreyprodromov.commands.Command;
+import com.andreyprodromov.commands.factories.CommandFactory;
 
 public final class DefaultHandler implements Handler {
 
+    private final CommandFactory commandFactory;
+
+    public DefaultHandler(CommandFactory commandFactory) {
+        this.commandFactory = commandFactory;
+    }
+
     @Override
     public void handle(String[] args) {
-        Command.create(args)
-               .execute();
+        commandFactory.create(args)
+                      .execute();
     }
 
 }

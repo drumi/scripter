@@ -1,4 +1,4 @@
-package com.andreyprodromov.environment.exceptions;
+package com.andreyprodromov.runtime.exceptions;
 
 public class EnvironmentDoesNotExistException extends RuntimeException {
 
