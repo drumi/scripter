@@ -6,7 +6,7 @@ scripter -c, --create <environment>
 	Creates a new environment
 	
 scripter -d, --delete <options>
-	Deletes, where options is one of the following
+	Deletes, where options is one of the following:
 		-gv, --global-variable <name>
 		-lv, --local-variable <environment> <name>
 		-env --environment <environment>
