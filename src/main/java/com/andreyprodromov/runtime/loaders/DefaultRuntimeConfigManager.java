@@ -3,7 +3,6 @@ package com.andreyprodromov.runtime.loaders;
 import com.google.gson.Gson;
 import com.andreyprodromov.runtime.RuntimeConfig;
 
-import javax.swing.filechooser.FileSystemView;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -51,13 +50,8 @@ public class DefaultRuntimeConfigManager implements RuntimeConfigManager {
     }
 
     private static Path getDefaultFolderPath() {
-        String appdata = System.getenv("APPDATA");
-
-        if (appdata != null)
-            return Path.of(appdata, "scripter");
-
         return Path.of(
-            FileSystemView.getFileSystemView().getDefaultDirectory().getPath(),
+            System.getProperty("user.home"),
             ".scripter"
         );
     }
