@@ -12,14 +12,23 @@ import com.andreyprodromov.runtime.loaders.DefaultRuntimeConfigManager;
 import com.andreyprodromov.runtime.loaders.RuntimeConfigManager;
 
 import java.io.OutputStream;
+import java.nio.file.Path;
 
 public class App {
+
+    private static final String PREFIX = "%[";
+    private static final String SUFFIX = "]%";
+
+    private static final Path DEFAULT_FOLDER = Path.of(
+        System.getProperty("user.home"),
+        ".scripter"
+    );
 
     public static void main(String[] args) {
 
         // Wire up dependencies
-        RuntimeConfigManager runtimeConfigManager = new DefaultRuntimeConfigManager();
-        Parser parser = new DefaultParser(runtimeConfigManager);
+        RuntimeConfigManager runtimeConfigManager = new DefaultRuntimeConfigManager(DEFAULT_FOLDER);
+        Parser parser = new DefaultParser(PREFIX, SUFFIX, runtimeConfigManager);
         OutputStream outputStream = System.out;
         Executor executor = new DefaultExecutor();
 
@@ -33,5 +42,4 @@ public class App {
             System.out.println(e.getMessage());
         }
     }
-
 }

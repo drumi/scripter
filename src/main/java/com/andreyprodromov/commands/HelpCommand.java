@@ -5,11 +5,9 @@ import java.io.PrintStream;
 
 public final class HelpCommand implements Command {
 
-    private final String[] args;
     private final PrintStream outputStream;
 
-    public HelpCommand(String[] args, OutputStream outputStream) {
-        this.args = args;
+    public HelpCommand(OutputStream outputStream) {
         this.outputStream = new PrintStream(outputStream);
     }
 

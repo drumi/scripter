@@ -32,7 +32,7 @@ public class DefaultCommandFactory implements CommandFactory {
     @Override
     public Command create(String[] args) {
         if (args.length == 0)
-            return new HelpCommand(args, outputStream);
+            return new HelpCommand(outputStream);
 
         final int COMMAND_INDEX = 0;
         String command = args[COMMAND_INDEX];
@@ -43,7 +43,7 @@ public class DefaultCommandFactory implements CommandFactory {
             case "-c", "--create" -> new CreateCommand(args, runtimeConfigManager);
             case "-d", "--delete" -> new DeleteCommand(args, runtimeConfigManager);
             case "-m", "--modify" -> new ModifyCommand(args, runtimeConfigManager);
-            case "-h", "--help" -> new HelpCommand(args, outputStream);
+            case "-h", "--help" -> new HelpCommand(outputStream);
             default -> throw new CommandDoesNotExistException(
                 String.format("\"%s\" is not an existing command", command)
             );

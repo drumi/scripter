@@ -13,7 +13,7 @@ public final class ListCommand implements Command {
 
     private static final int COMMAND_TYPE_INDEX = 1;
 
-    private final String args[];
+    private final String[] args;
     private final Parser parser;
     private final RuntimeConfigManager runtimeConfigManager;
     private final PrintStream outputStream;

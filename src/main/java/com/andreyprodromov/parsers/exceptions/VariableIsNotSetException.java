@@ -1,4 +1,4 @@
-package com.andreyprodromov.runtime.exceptions;
+package com.andreyprodromov.parsers.exceptions;
 
 public class VariableIsNotSetException extends RuntimeException {
 

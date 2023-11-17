@@ -9,11 +9,17 @@ import java.nio.file.Path;
 
 public class DefaultRuntimeConfigManager implements RuntimeConfigManager {
 
-    private static final Path FOLDER_PATH = getDefaultFolderPath();
-    private static final Path FILE_PATH = FOLDER_PATH.resolve("config");
     private static final Gson GSON = new Gson();
 
+    private final Path folderPath;
+    private final Path filePath;
+
     private RuntimeConfig runtimeConfig;
+
+    public DefaultRuntimeConfigManager(Path folderPath) {
+        this.folderPath = folderPath;
+        this.filePath = folderPath.resolve("config");
+    }
 
     @Override
     public RuntimeConfig getConfig() {
@@ -28,12 +34,12 @@ public class DefaultRuntimeConfigManager implements RuntimeConfigManager {
 
     private RuntimeConfig loadConfig() {
         try {
-            if (!Files.exists(FILE_PATH)) {
-                Files.createDirectories(FOLDER_PATH);
-                Files.createFile(FILE_PATH);
+            if (!Files.exists(filePath)) {
+                Files.createDirectories(folderPath);
+                Files.createFile(filePath);
             }
 
-            String input = Files.readString(FILE_PATH);
+            String input = Files.readString(filePath);
             return GSON.fromJson(input, RuntimeConfig.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -43,16 +49,9 @@ public class DefaultRuntimeConfigManager implements RuntimeConfigManager {
     @Override
     public void saveConfig() {
         try {
-            Files.writeString(FILE_PATH, GSON.toJson(runtimeConfig));
+            Files.writeString(filePath, GSON.toJson(runtimeConfig));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private static Path getDefaultFolderPath() {
-        return Path.of(
-            System.getProperty("user.home"),
-            ".scripter"
-        );
     }
 }

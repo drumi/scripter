@@ -1,8 +1,6 @@
 package com.andreyprodromov.runtime;
 
 import com.andreyprodromov.runtime.exceptions.EnvironmentDoesNotExistException;
-import com.andreyprodromov.runtime.exceptions.ScriptDoesNotExistException;
-import com.andreyprodromov.runtime.exceptions.VariableIsNotSetException;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -61,24 +59,17 @@ public class RuntimeConfig {
         scripts.put(environmentName, script);
     }
 
-    public String getVariable(String environmentName, String variableName) {
+    public String getLocalVariable(String environmentName, String variableName) {
+        if (!environments.contains(environmentName))
+            throw createEnvironmentDoesNotExistException(environmentName);
+
         Map<String, String> localVariablesForEnvironment = localVariables.get(environmentName);
 
-        if (localVariablesForEnvironment != null) {
-            String localVariable = localVariablesForEnvironment.get(variableName);
+        return localVariablesForEnvironment.get(variableName);
+    }
 
-            if (localVariable != null) {
-                return localVariable;
-            }
-        }
-
-        String returnedVariable = globalVariables.get(variableName);
-
-        if (returnedVariable != null) {
-            return returnedVariable;
-        }
-
-        throw createVariableIsNotSetException(variableName);
+    public String getGlobalVariable(String variableName) {
+        return globalVariables.get(variableName);
     }
 
     public Map<String, String> getAllGlobalVariables() {
@@ -90,23 +81,12 @@ public class RuntimeConfig {
     }
 
     public String getScript(String environmentName) {
-        if (scripts.get(environmentName) == null)
-            throw new ScriptDoesNotExistException(
-                String.format("\"%s\" does not have a script set", environmentName)
-            );
-
         return scripts.get(environmentName);
     }
 
     private EnvironmentDoesNotExistException createEnvironmentDoesNotExistException(String environmentName) {
         return new EnvironmentDoesNotExistException(
-            String.format("\"%s\" does not exist as an com.andreyprodromov.environment", environmentName)
-        );
-    }
-
-    private VariableIsNotSetException createVariableIsNotSetException(String variableName) {
-        return new VariableIsNotSetException(
-            String.format("\"%s\" variable is not set", variableName)
+            String.format("\"%s\" does not exist as an environment", environmentName)
         );
     }
 }
