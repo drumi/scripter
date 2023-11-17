@@ -23,7 +23,7 @@ class ModifyCommandTest {
     void beforeEach() {
         when(manager.getConfig()).thenReturn(config);
     }
-    
+
     @Test
     void setGlobalVariable() {
         String[] args = new String[] { "-m", "-sgv", "global", "value"};
