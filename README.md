@@ -1,5 +1,5 @@
 # Scripter
-Small Windows utility tool to deal with repeating tasks
+Small Windows utility tool for managing scripts
 ## Commands
 ```
 scripter -c, --create <environment> 
