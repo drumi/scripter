@@ -1,5 +1,5 @@
 # Scripter
-Small Windows utility tool for managing scripts
+Small utility tool for managing scripts
 ## Commands
 ```
 scripter -c, --create <environment> 
