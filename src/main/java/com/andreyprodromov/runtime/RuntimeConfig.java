@@ -1,6 +1,7 @@
 package com.andreyprodromov.runtime;
 
 import com.andreyprodromov.runtime.exceptions.EnvironmentDoesNotExistException;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -59,6 +60,7 @@ public class RuntimeConfig {
         scripts.put(environmentName, script);
     }
 
+    @Nullable
     public String getLocalVariable(String environmentName, String variableName) {
         if (!environments.contains(environmentName))
             throw createEnvironmentDoesNotExistException(environmentName);
@@ -68,6 +70,7 @@ public class RuntimeConfig {
         return localVariablesForEnvironment.get(variableName);
     }
 
+    @Nullable
     public String getGlobalVariable(String variableName) {
         return globalVariables.get(variableName);
     }
@@ -80,6 +83,7 @@ public class RuntimeConfig {
         return localVariables.getOrDefault(environmentName, new HashMap<>());
     }
 
+    @Nullable
     public String getScript(String environmentName) {
         return scripts.get(environmentName);
     }
