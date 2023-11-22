@@ -1,7 +1,9 @@
 package com.andreyprodromov.commands;
 
+import com.andreyprodromov.commands.exceptions.ArgumentsMismatchException;
 import com.andreyprodromov.runtime.RuntimeConfig;
 import com.andreyprodromov.runtime.loaders.RuntimeConfigManager;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -49,4 +51,17 @@ class DeleteCommandTest {
         command.execute();
         verify(config).deleteGlobalVariable("var");
     }
+
+    @Test
+    void whenCalledWithWrongArgumentCount_thenExcept() {
+        String[] args = new String[] { "-d", "-env", "env", "another"};
+        var command = new DeleteCommand(args, manager);
+
+        Assertions.assertThrows(
+            ArgumentsMismatchException.class,
+            command::execute,
+            "Command with mismatched arguments should throw exception on execution"
+        );
+    }
+
 }

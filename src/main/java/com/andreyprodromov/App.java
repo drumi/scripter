@@ -35,7 +35,7 @@ public class App {
         CommandFactory commandFactory = new DefaultCommandFactory(runtimeConfigManager, parser, outputStream, executor);
         Handler handler = new DefaultHandler(commandFactory);
 
-        // Handle command
+        // Handle input
         try {
             handler.handle(args);
         } catch (Exception e) {

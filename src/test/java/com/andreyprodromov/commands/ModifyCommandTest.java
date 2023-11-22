@@ -1,5 +1,6 @@
 package com.andreyprodromov.commands;
 
+import com.andreyprodromov.commands.exceptions.ArgumentsMismatchException;
 import com.andreyprodromov.runtime.RuntimeConfig;
 import com.andreyprodromov.runtime.loaders.RuntimeConfigManager;
 import org.junit.jupiter.api.Assertions;
@@ -56,5 +57,17 @@ class ModifyCommandTest {
         command.execute();
 
         verify(config).setScript("env", "script in file");
+    }
+
+    @Test
+    void whenCalledWithWrongArgumentCount_thenExcept() {
+        String[] args = new String[] { "-m", "-ss", "env" };
+        var command = new ModifyCommand(args, manager);
+
+        Assertions.assertThrows(
+            ArgumentsMismatchException.class,
+            command::execute,
+            "Command with mismatched arguments should throw exception on execution"
+        );
     }
 }

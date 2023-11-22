@@ -26,9 +26,6 @@ public class DefaultRuntimeConfigManager implements RuntimeConfigManager {
         if (runtimeConfig == null)
             runtimeConfig = loadConfig();
 
-        if (runtimeConfig == null)
-            runtimeConfig = new RuntimeConfig();
-
         return runtimeConfig;
     }
 

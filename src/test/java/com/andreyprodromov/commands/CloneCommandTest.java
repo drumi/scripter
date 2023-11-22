@@ -1,7 +1,9 @@
 package com.andreyprodromov.commands;
 
+import com.andreyprodromov.commands.exceptions.ArgumentsMismatchException;
 import com.andreyprodromov.runtime.RuntimeConfig;
 import com.andreyprodromov.runtime.loaders.RuntimeConfigManager;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -39,6 +41,19 @@ class CloneCommandTest {
         verify(config).setLocalVariable("new-env", "variable1", "value1");
         verify(config).setLocalVariable("new-env", "variable2", "value2");
         verify(config).setScript("new-env", "the script");
+    }
+
+    @Test
+    void whenCalledWithWrongArgumentCount_thenExcept() {
+        String[] args = new String[] { "-cl", "old-env"};
+        var command = new CloneCommand(args, manager);
+
+
+        Assertions.assertThrows(
+            ArgumentsMismatchException.class,
+            command::execute,
+            "Command with mismatched arguments should throw exception on execution"
+        );
     }
 
 }

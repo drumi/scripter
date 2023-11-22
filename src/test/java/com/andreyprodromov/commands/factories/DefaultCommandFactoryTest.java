@@ -87,7 +87,7 @@ class DefaultCommandFactoryTest {
 
     private void check(List<String> names, Class<?> clazz) {
         for (var name : names) {
-            String[] args = new String[] { name };
+            var args = new String[] { name };
             Command command = factory.create(args);
 
             Assertions.assertInstanceOf(

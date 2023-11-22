@@ -1,9 +1,11 @@
 package com.andreyprodromov.commands;
 
+import com.andreyprodromov.commands.exceptions.ArgumentsMismatchException;
 import com.andreyprodromov.parsers.Parser;
 import com.andreyprodromov.platform.Executor;
 import com.andreyprodromov.runtime.RuntimeConfig;
 import com.andreyprodromov.runtime.loaders.RuntimeConfigManager;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,6 +31,18 @@ class ExecuteCommandTest {
 
         verify(parser).parse("env", new String[]{ "arg1" });
         verify(executor).execute("parsed script");
+    }
+
+    @Test
+    void whenCalledWithWrongArgumentCount_thenExcept() {
+        String[] args = new String[] { "-e" };
+        var command = new ExecuteCommand(args, parser, executor);
+
+        Assertions.assertThrows(
+            ArgumentsMismatchException.class,
+            command::execute,
+            "Command with mismatched arguments should throw exception on execution"
+        );
     }
 
 }

@@ -1,5 +1,6 @@
 package com.andreyprodromov.commands;
 
+import com.andreyprodromov.commands.exceptions.ArgumentsMismatchException;
 import com.andreyprodromov.parsers.Parser;
 import com.andreyprodromov.platform.Executor;
 import com.andreyprodromov.runtime.RuntimeConfig;
@@ -143,6 +144,18 @@ class ListCommandTest {
         Assertions.assertTrue(
             outputStream.toString().contains("parsed script"),
             "Should list parsed script"
+        );
+    }
+
+    @Test
+    void whenCalledWithWrongArgumentCount_thenExcept() {
+        String[] args = new String[] { "-l" };
+        var command = new ListCommand(args, parser, manager, outputStream);
+
+        Assertions.assertThrows(
+            ArgumentsMismatchException.class,
+            command::execute,
+            "Command with mismatched arguments should throw exception on execution"
         );
     }
 

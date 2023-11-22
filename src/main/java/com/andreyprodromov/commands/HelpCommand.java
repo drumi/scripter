@@ -40,7 +40,7 @@ public final class HelpCommand implements Command {
                 
             scripter -m, --modify <options>
                 Modifies, where <options> is one of the following:
-                    -slv, --set-local-variable <environment> <name> <value> 
+                    -slv, --set-local-variable <environment> <name> <value>
                     -sgv, --set-global-variable <name> <value>
                     -ss,  --set-script <environment> <file>
             
