@@ -1,5 +1,6 @@
 package com.andreyprodromov.commands.factories;
 
+import com.andreyprodromov.commands.CloneCommand;
 import com.andreyprodromov.commands.Command;
 import com.andreyprodromov.commands.CreateCommand;
 import com.andreyprodromov.commands.DeleteCommand;
@@ -45,6 +46,12 @@ class DefaultCommandFactoryTest {
     void createHelpCommand() {
         List<String> names = List.of("-h", "--help");
         check(names, HelpCommand.class);
+    }
+
+    @Test
+    void createCloneCommand() {
+        List<String> names = List.of("-cl", "--clone");
+        check(names, CloneCommand.class);
     }
 
     @Test

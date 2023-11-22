@@ -6,7 +6,7 @@ public final class CreateCommand implements Command {
 
     private static final int ENVIRONMENT_NAME_INDEX = 1;
 
-    private final String args[];
+    private final String[] args;
     private final RuntimeConfigManager runtimeConfigManager;
 
     public CreateCommand(String[] args, RuntimeConfigManager runtimeConfigManager) {

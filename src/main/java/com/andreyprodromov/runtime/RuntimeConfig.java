@@ -1,5 +1,6 @@
 package com.andreyprodromov.runtime;
 
+import com.andreyprodromov.runtime.exceptions.EnvironmentAlreadyExistsException;
 import com.andreyprodromov.runtime.exceptions.EnvironmentDoesNotExistException;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,11 +17,17 @@ public class RuntimeConfig {
     private final Map<String, String> scripts = new HashMap<>();
 
     public void createEnvironment(String environmentName) {
+        if (environments.contains(environmentName))
+            throw createEnvironmentAlreadyExistsException(environmentName);
+
         environments.add(environmentName);
         localVariables.computeIfAbsent(environmentName, k -> new HashMap<>());
     }
 
     public void deleteEnvironment(String environmentName) {
+        if (!environments.contains(environmentName))
+            throw createEnvironmentDoesNotExistException(environmentName);
+
         environments.remove(environmentName);
         localVariables.remove(environmentName);
         scripts.remove(environmentName);
@@ -91,6 +98,12 @@ public class RuntimeConfig {
     private EnvironmentDoesNotExistException createEnvironmentDoesNotExistException(String environmentName) {
         return new EnvironmentDoesNotExistException(
             String.format("\"%s\" does not exist as an environment", environmentName)
+        );
+    }
+
+    private EnvironmentAlreadyExistsException createEnvironmentAlreadyExistsException(String environmentName) {
+        return new EnvironmentAlreadyExistsException(
+            String.format("\"%s\" already exists as an environment", environmentName)
         );
     }
 }

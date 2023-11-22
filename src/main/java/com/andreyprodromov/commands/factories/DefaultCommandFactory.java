@@ -1,5 +1,6 @@
 package com.andreyprodromov.commands.factories;
 
+import com.andreyprodromov.commands.CloneCommand;
 import com.andreyprodromov.commands.Command;
 import com.andreyprodromov.commands.CreateCommand;
 import com.andreyprodromov.commands.DeleteCommand;
@@ -41,6 +42,7 @@ public class DefaultCommandFactory implements CommandFactory {
             case "-l", "--list" -> new ListCommand(args, parser, runtimeConfigManager, outputStream);
             case "-e", "--execute" -> new ExecuteCommand(args, parser, executor);
             case "-c", "--create" -> new CreateCommand(args, runtimeConfigManager);
+            case "-cl", "--clone" -> new CloneCommand(args, runtimeConfigManager);
             case "-d", "--delete" -> new DeleteCommand(args, runtimeConfigManager);
             case "-m", "--modify" -> new ModifyCommand(args, runtimeConfigManager);
             case "-h", "--help" -> new HelpCommand(outputStream);
