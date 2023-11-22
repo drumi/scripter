@@ -32,7 +32,7 @@ scripter -m, --modify <options>
 		-ss,  --set-script <environment> <file>
 
 scripter -h, --help
-                Lists help menu
+	Lists help menu
 ```
 
 ## Example Usage
