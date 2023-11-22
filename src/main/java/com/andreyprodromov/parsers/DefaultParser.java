@@ -26,7 +26,7 @@ public class DefaultParser implements Parser {
 
         if (script == null)
             throw new ScriptDoesNotExistException(
-                String.format("\"%s\" does not have a script set", environment)
+                "\"%s\" does not have a script set".formatted(environment)
             );
 
         script = putCommandlineArguments(script, args);
@@ -38,8 +38,8 @@ public class DefaultParser implements Parser {
 
     private String putCommandlineArguments(String script, String[] args) {
         for (int i = 0; i < args.length; i++) {
-            String commandLineArgumentTemplate = String.format(
-                "%s%d%s",
+            String commandLineArgumentTemplate =
+                "%s%d%s".formatted(
                 variablePrefix,
                 i + 1, // Command-line arguments start from 1
                 variableSuffix
@@ -84,7 +84,7 @@ public class DefaultParser implements Parser {
             return globalVariable;
 
         throw new VariableIsNotSetException(
-            String.format("\"%s\" is not set", variableName)
+            "\"%s\" is not set".formatted(variableName)
         );
     }
 }

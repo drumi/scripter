@@ -47,7 +47,7 @@ public class DefaultCommandFactory implements CommandFactory {
             case "-m", "--modify" -> new ModifyCommand(args, runtimeConfigManager);
             case "-h", "--help" -> new HelpCommand(outputStream);
             default -> throw new CommandDoesNotExistException(
-                String.format("\"%s\" is not an existing command", command)
+                "\"%s\" is not an existing command".formatted(command)
             );
         };
     }

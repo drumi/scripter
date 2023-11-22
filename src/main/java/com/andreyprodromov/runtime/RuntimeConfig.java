@@ -97,13 +97,13 @@ public class RuntimeConfig {
 
     private EnvironmentDoesNotExistException createEnvironmentDoesNotExistException(String environmentName) {
         return new EnvironmentDoesNotExistException(
-            String.format("\"%s\" does not exist as an environment", environmentName)
+            "\"%s\" does not exist as an environment".formatted(environmentName)
         );
     }
 
     private EnvironmentAlreadyExistsException createEnvironmentAlreadyExistsException(String environmentName) {
         return new EnvironmentAlreadyExistsException(
-            String.format("\"%s\" already exists as an environment", environmentName)
+            "\"%s\" already exists as an environment".formatted(environmentName)
         );
     }
 }

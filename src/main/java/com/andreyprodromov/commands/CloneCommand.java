@@ -29,7 +29,9 @@ public class CloneCommand implements Command {
 
         String script = config.getScript(originalEnvironment);
         if (script != null)
-            config.setScript(clonedEnvironment,script);
+            config.setScript(clonedEnvironment, script);
+
+        runtimeConfigManager.saveConfig();
     }
 
 }

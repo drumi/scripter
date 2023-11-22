@@ -38,7 +38,7 @@ public final class DeleteCommand implements Command {
             }
             default -> {
                 throw new CommandDoesNotExistException(
-                    String.format("\"%s\" is not an existing option for --delete command", command)
+                    "\"%s\" is not an existing option for --delete command".formatted(command)
                 );
             }
         }

@@ -26,7 +26,7 @@ scripter -l, --list <options>
 		-ps, --parsed-script <environment> <arg1> <arg2> ... <argN>
 	
 scripter -m, --modify <options>
-	Modifies environment, where <options> is one of the following:
+	Modifies, where <options> is one of the following:
 		-slv, --set-local-variable <environment> <name> <value> 
 		-sgv, --set-global-variable <name> <value>
 		-ss,  --set-script <environment> <file>

@@ -2,6 +2,7 @@ package com.andreyprodromov.commands;
 
 import com.andreyprodromov.commands.exceptions.CommandDoesNotExistException;
 import com.andreyprodromov.parsers.Parser;
+import com.andreyprodromov.runtime.exceptions.EnvironmentDoesNotExistException;
 import com.andreyprodromov.runtime.loaders.RuntimeConfigManager;
 
 import java.io.OutputStream;
@@ -60,6 +61,12 @@ public final class ListCommand implements Command {
             }
             case "-s", "--script" -> {
                 String environmentName = args[COMMAND_TYPE_INDEX + 1];
+
+                if (!config.getEnvironments().contains(environmentName))
+                    throw new EnvironmentDoesNotExistException(
+                        "%s does not exist as an environment".formatted(environmentName)
+                    );
+
                 var script = config.getScript(environmentName);
 
                 outputStream.printf("Script for \"%s\":%n%s%n", environmentName, script);
@@ -75,7 +82,7 @@ public final class ListCommand implements Command {
             }
             default -> {
                 throw new CommandDoesNotExistException(
-                    String.format("\"%s\" is not an existing option for --list command", command)
+                    "\"%s\" is not an existing option for --list command".formatted(command)
                 );
             }
         }

@@ -60,7 +60,7 @@ public final class ModifyCommand implements Command {
             }
             default -> {
                 throw new CommandDoesNotExistException(
-                    String.format("\"%s\" is not an existing option for --modify command", command)
+                    "\"%s\" is not an existing option for --modify command".formatted(command)
                 );
             }
         }
