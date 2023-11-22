@@ -101,8 +101,14 @@ class ListCommandTest {
         String[] args = new String[] { "-l", "-s", "env"};
         var command = new ListCommand(args, parser, manager, outputStream);
 
+        var environments = Set.of("env");
+
         when(config.getScript("env"))
             .thenReturn("script");
+
+        when(config.getEnvironments())
+            .thenReturn(environments);
+
 
         command.execute();
 
