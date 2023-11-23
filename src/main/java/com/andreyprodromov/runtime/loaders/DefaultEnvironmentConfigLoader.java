@@ -13,31 +13,38 @@ public class DefaultEnvironmentConfigLoader implements EnvironmentConfigLoader {
 
     private final Path folderPath;
     private final Path filePath;
-
-    private EnvironmentConfig environmentConfig;
+    private final EnvironmentConfig environmentConfig;
 
     public DefaultEnvironmentConfigLoader(Path folderPath) {
         this.folderPath = folderPath;
         this.filePath = folderPath.resolve("config");
+
+        if (!Files.exists(filePath)) {
+            createDirectories();
+        }
+
+        this.environmentConfig = loadConfig();
     }
 
     @Override
     public EnvironmentConfig getConfig() {
-        if (environmentConfig == null)
-            environmentConfig = loadConfig();
-
         return environmentConfig;
     }
 
     private EnvironmentConfig loadConfig() {
         try {
-            if (!Files.exists(filePath)) {
-                Files.createDirectories(folderPath);
-                Files.createFile(filePath);
-            }
-
             String input = Files.readString(filePath);
-            return GSON.fromJson(input, EnvironmentConfig.class);
+            var config = GSON.fromJson(input, EnvironmentConfig.class);
+            return config == null ? new EnvironmentConfig() : config;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void createDirectories() {
+        try {
+            Files.createDirectories(folderPath);
+            Files.createFile(filePath);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

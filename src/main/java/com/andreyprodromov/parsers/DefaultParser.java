@@ -82,7 +82,7 @@ public class DefaultParser implements Parser {
 
         if (globalVariable != null)
             return globalVariable;
-
+        
         throw new VariableIsNotSetException(
             "\"%s\" is not set".formatted(variableName)
         );
