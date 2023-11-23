@@ -12,6 +12,7 @@ scripter -d, --delete <options>
 	Deletes, where <options> is one of the following:
 		-gv, --global-variable <name>
 		-lv, --local-variable <environment> <name>
+		-s, --script <environment>
 		-env, --environment <environment>
 	
 scripter -e, --execute <environment> <arg1> <arg2> ... <argN>
@@ -29,7 +30,7 @@ scripter -m, --modify <options>
 	Modifies, where <options> is one of the following:
 		-slv, --set-local-variable <environment> <name> <value> 
 		-sgv, --set-global-variable <name> <value>
-		-ss,  --set-script <environment> <file>
+		-ss, --set-script <environment> <file>
 
 scripter -h, --help
 	Lists help menu

@@ -13,6 +13,7 @@ public final class DeleteCommand implements Command {
     private static final int LOCAL_VARIABLE_OPTION_EXPECTED_ARGS_LENGTH = 4;
     private static final int GLOBAL_VARIABLE_OPTION_EXPECTED_ARGS_LENGTH = 3;
     private static final int ENVIRONMENT_OPTION_EXPECTED_ARGS_LENGTH = 3;
+    private static final int SCRIPT_OPTION_EXPECTED_ARGS_LENGTH = 3;
 
     private final String[] args;
     private final EnvironmentConfigLoader environmentConfigLoader;
@@ -43,6 +44,13 @@ public final class DeleteCommand implements Command {
                 String variableName = args[DELETION_TYPE_INDEX + 1];
 
                 config.deleteGlobalVariable(variableName);
+            }
+            case "-s", "--script" -> {
+                Util.assertExactLength(SCRIPT_OPTION_EXPECTED_ARGS_LENGTH, args);
+
+                String environment = args[DELETION_TYPE_INDEX + 1];
+
+                config.deleteScript(environment);
             }
             case "-env", "--environment" -> {
                 Util.assertExactLength(ENVIRONMENT_OPTION_EXPECTED_ARGS_LENGTH, args);

@@ -25,6 +25,7 @@ public final class HelpCommand implements Command {
                 Deletes, where <options> is one of the following:
                     -gv, --global-variable <name>
                     -lv, --local-variable <environment> <name>
+                    -s, --script <environment>
                     -env, --environment <environment>
                 
             scripter -e, --execute <environment> <arg1> <arg2> ... <argN>

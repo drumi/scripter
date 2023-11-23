@@ -51,6 +51,17 @@ class DeleteCommandTest {
     }
 
     @Test
+    void deletingScript() {
+        String[] args = new String[] {"-d", "-s", "environment"};
+        var command = new DeleteCommand(args, manager);
+
+        when(manager.getConfig()).thenReturn(config);
+
+        command.execute();
+        verify(config).deleteScript("environment");
+    }
+
+    @Test
     void whenCalledWithWrongArgumentCount_thenExcept() {
         String[] args = new String[] { "-d", "-env", "env", "another"};
         var command = new DeleteCommand(args, manager);
