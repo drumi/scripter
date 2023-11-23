@@ -15,35 +15,35 @@ public final class HelpCommand implements Command {
     public void execute() {
         outputStream.println(
             """
-            scripter -c, --create <environment>
-                Creates a new environment
+            scripter -c, --create <env>
+                Creates a new environment <env>
                 
-            scripter -cl, --clone <original-environment> <new-environment>
-                Creates a <new-environment> which is a clone of <original-environment>
+            scripter -cl, --clone <env> <new_env>
+                Creates a new environment <new_env> which is a clone of <env>
                 
-            scripter -d, --delete <options>
-                Deletes, where <options> is one of the following:
-                    -gv, --global-variable <variable>
-                    -lv, --local-variable <environment> <variable>
-                    -s, --script <environment>
-                    -env, --environment <environment>
+            scripter -d, --delete {options}
+                Deletes, where {options} is one of the following:
+                    -gv, --global-variable <var>
+                    -lv, --local-variable <env> <var>
+                    -s, --script <env>
+                    -env, --environment <env>
                 
-            scripter -e, --execute <environment> <arg1> <arg2> ... <argN>
-                Executes the script set in the <environment> with arguments passed as <argN>
+            scripter -e, --execute <env> <args>...
+                Executes the script set in the environment <env> with arguments passed as <args>...
                 
-            scripter -l, --list <options>
-                Lists values, where <options> is one of the following:
+            scripter -l, --list {options}
+                Lists values, where {options} is one of the following:
                     -gv, --global-variables
                     -lv, --local-variables
                     -env, --environments
-                    -s, --script <environment>
-                    -ps, --parsed-script <environment> <arg1> <arg2> ... <argN>
+                    -s, --script <env>
+                    -ps, --parsed-script <env> <args>...
                 
-            scripter -m, --modify <options>
-                Modifies, where <options> is one of the following:
-                    -slv, --set-local-variable <environment> <variable> <value>
-                    -sgv, --set-global-variable <variable> <value>
-                    -ss,  --set-script <environment> <file>
+            scripter -m, --modify {options}
+                Modifies, where {options} is one of the following:
+                    -slv, --set-local-variable <env> <var> <value>
+                    -sgv, --set-global-variable <var> <value>
+                    -ss,  --set-script <env> <file>
             
             scripter -h, --help
                 Lists help menu
