@@ -2,7 +2,7 @@ package com.andreyprodromov.commands;
 
 import com.andreyprodromov.commands.exceptions.CommandDoesNotExistException;
 import com.andreyprodromov.commands.utils.Util;
-import com.andreyprodromov.runtime.loaders.RuntimeConfigManager;
+import com.andreyprodromov.runtime.loaders.EnvironmentConfigLoader;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,11 +20,11 @@ public final class ModifyCommand implements Command {
 
 
     private final String[] args;
-    private final RuntimeConfigManager runtimeConfigManager;
+    private final EnvironmentConfigLoader environmentConfigLoader;
 
-    public ModifyCommand(String[] args, RuntimeConfigManager runtimeConfigManager) {
+    public ModifyCommand(String[] args, EnvironmentConfigLoader environmentConfigLoader) {
         this.args = args;
-        this.runtimeConfigManager = runtimeConfigManager;
+        this.environmentConfigLoader = environmentConfigLoader;
     }
 
     @Override
@@ -32,7 +32,7 @@ public final class ModifyCommand implements Command {
         Util.assertMinimumLength(EXPECTED_ARGS_MINIMUM_LENGTH, args);
 
         String command = args[MODIFICATION_TYPE_INDEX];
-        var config = runtimeConfigManager.getConfig();
+        var config = environmentConfigLoader.getConfig();
 
         switch (command) {
             case "-slv", "--set-local-variable" -> {
@@ -82,7 +82,7 @@ public final class ModifyCommand implements Command {
             }
         }
 
-        runtimeConfigManager.saveConfig();
+        environmentConfigLoader.saveConfig();
     }
 
 }

@@ -10,7 +10,7 @@ import com.andreyprodromov.commands.ListCommand;
 import com.andreyprodromov.commands.ModifyCommand;
 import com.andreyprodromov.parsers.Parser;
 import com.andreyprodromov.platform.Executor;
-import com.andreyprodromov.runtime.loaders.RuntimeConfigManager;
+import com.andreyprodromov.runtime.loaders.EnvironmentConfigLoader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,18 +19,17 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.io.OutputStream;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 @ExtendWith(MockitoExtension.class)
 class DefaultCommandFactoryTest {
 
-    RuntimeConfigManager runtimeConfigManager = mock(RuntimeConfigManager.class);
+    EnvironmentConfigLoader environmentConfigLoader = mock(EnvironmentConfigLoader.class);
     Parser parser = mock(Parser.class);
     Executor executor = mock(Executor.class);
     OutputStream outputStream = mock(OutputStream.class);
 
-    CommandFactory factory = new DefaultCommandFactory(runtimeConfigManager, parser, outputStream, executor);
+    CommandFactory factory = new DefaultCommandFactory(environmentConfigLoader, parser, outputStream, executor);
     @Test
     void noArgumentsReturnsHelpCommand() {
         String[] args = new String[] {};

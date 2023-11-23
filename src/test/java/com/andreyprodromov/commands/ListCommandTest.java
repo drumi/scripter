@@ -2,20 +2,17 @@ package com.andreyprodromov.commands;
 
 import com.andreyprodromov.commands.exceptions.ArgumentsMismatchException;
 import com.andreyprodromov.parsers.Parser;
-import com.andreyprodromov.platform.Executor;
-import com.andreyprodromov.runtime.RuntimeConfig;
-import com.andreyprodromov.runtime.loaders.RuntimeConfigManager;
+import com.andreyprodromov.runtime.EnvironmentConfig;
+import com.andreyprodromov.runtime.loaders.EnvironmentConfigLoader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.util.Map;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.atLeastOnce;
@@ -26,8 +23,8 @@ import static org.mockito.Mockito.when;
 
 class ListCommandTest {
 
-    RuntimeConfigManager manager = mock(RuntimeConfigManager.class);
-    RuntimeConfig config = mock(RuntimeConfig.class);
+    EnvironmentConfigLoader manager = mock(EnvironmentConfigLoader.class);
+    EnvironmentConfig config = mock(EnvironmentConfig.class);
     Parser parser = mock(Parser.class);
 
     OutputStream outputStream = new ByteArrayOutputStream();

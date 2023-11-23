@@ -3,10 +3,8 @@ package com.andreyprodromov.commands;
 import com.andreyprodromov.commands.exceptions.ArgumentsMismatchException;
 import com.andreyprodromov.parsers.Parser;
 import com.andreyprodromov.platform.Executor;
-import com.andreyprodromov.runtime.RuntimeConfig;
-import com.andreyprodromov.runtime.loaders.RuntimeConfigManager;
+import com.andreyprodromov.runtime.loaders.EnvironmentConfigLoader;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -16,7 +14,7 @@ import static org.mockito.Mockito.when;
 
 class ExecuteCommandTest {
 
-    RuntimeConfigManager manager = mock(RuntimeConfigManager.class);
+    EnvironmentConfigLoader manager = mock(EnvironmentConfigLoader.class);
     Parser parser = mock(Parser.class);
     Executor executor = mock(Executor.class);
 

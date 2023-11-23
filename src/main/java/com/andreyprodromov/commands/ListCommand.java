@@ -4,7 +4,7 @@ import com.andreyprodromov.commands.exceptions.CommandDoesNotExistException;
 import com.andreyprodromov.commands.utils.Util;
 import com.andreyprodromov.parsers.Parser;
 import com.andreyprodromov.runtime.exceptions.EnvironmentDoesNotExistException;
-import com.andreyprodromov.runtime.loaders.RuntimeConfigManager;
+import com.andreyprodromov.runtime.loaders.EnvironmentConfigLoader;
 
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -25,13 +25,13 @@ public final class ListCommand implements Command {
 
     private final String[] args;
     private final Parser parser;
-    private final RuntimeConfigManager runtimeConfigManager;
+    private final EnvironmentConfigLoader environmentConfigLoader;
     private final PrintStream outputStream;
 
-    public ListCommand(String[] args, Parser parser, RuntimeConfigManager runtimeConfigManager, OutputStream outputStream) {
+    public ListCommand(String[] args, Parser parser, EnvironmentConfigLoader environmentConfigLoader, OutputStream outputStream) {
         this.args = args;
         this.parser = parser;
-        this.runtimeConfigManager = runtimeConfigManager;
+        this.environmentConfigLoader = environmentConfigLoader;
         this.outputStream = new PrintStream(outputStream);
     }
 
@@ -39,7 +39,7 @@ public final class ListCommand implements Command {
     public void execute() {
         Util.assertMinimumLength(EXPECTED_ARGS_MINIMUM_LENGTH, args);
 
-        var config = runtimeConfigManager.getConfig();
+        var config = environmentConfigLoader.getConfig();
         String command = args[COMMAND_TYPE_INDEX];
 
         switch (command) {

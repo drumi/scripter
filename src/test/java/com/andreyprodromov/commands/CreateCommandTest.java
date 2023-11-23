@@ -1,23 +1,20 @@
 package com.andreyprodromov.commands;
 
 import com.andreyprodromov.commands.exceptions.ArgumentsMismatchException;
-import com.andreyprodromov.runtime.RuntimeConfig;
-import com.andreyprodromov.runtime.loaders.RuntimeConfigManager;
+import com.andreyprodromov.runtime.EnvironmentConfig;
+import com.andreyprodromov.runtime.loaders.EnvironmentConfigLoader;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CreateCommandTest {
 
-    RuntimeConfigManager manager = mock(RuntimeConfigManager.class);
-    RuntimeConfig config = mock(RuntimeConfig.class);
+    EnvironmentConfigLoader manager = mock(EnvironmentConfigLoader.class);
+    EnvironmentConfig config = mock(EnvironmentConfig.class);
 
     @Test
     void creatingEnvironment() {

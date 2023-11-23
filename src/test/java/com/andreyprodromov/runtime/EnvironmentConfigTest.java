@@ -7,49 +7,49 @@ import org.junit.jupiter.api.Test;
 import java.util.Map;
 import java.util.Set;
 
-class RuntimeConfigTest {
+class EnvironmentConfigTest {
 
     @Test
     void whenEnvironmentIsCreated_thenItIsAddedToConfig() {
-        var config = new RuntimeConfig();
+        var config = new EnvironmentConfig();
         String environment = "test";
 
         Assertions.assertFalse(
             config.getEnvironments().contains(environment),
-            "RuntimeConfig should not contain the environment before creating it"
+            "EnvironmentConfig should not contain the environment before creating it"
         );
 
         config.createEnvironment(environment);
 
         Assertions.assertTrue(
             config.getEnvironments().contains(environment),
-            "RuntimeConfig should contain the environment after creating it"
+            "EnvironmentConfig should contain the environment after creating it"
         );
     }
 
     @Test
     void whenEnvironmentIsDeleted_thenItIsRemovedFromConfig() {
-        var config = new RuntimeConfig();
+        var config = new EnvironmentConfig();
         String environment = "test";
 
         config.createEnvironment(environment);
 
         Assertions.assertTrue(
             config.getEnvironments().contains(environment),
-            "RuntimeConfig should contain the environment before deleting it"
+            "EnvironmentConfig should contain the environment before deleting it"
         );
 
         config.deleteEnvironment(environment);
 
         Assertions.assertFalse(
             config.getEnvironments().contains(environment),
-            "RuntimeConfig should not contain the environment after deleting it"
+            "EnvironmentConfig should not contain the environment after deleting it"
         );
     }
 
     @Test
     void whenGetEnvironmentsIsCalled_thenReturnsEnvironments() {
-        var config = new RuntimeConfig();
+        var config = new EnvironmentConfig();
         String env1 = "env1";
         String env2 = "env2";
         String env3 = "env3";
@@ -67,7 +67,7 @@ class RuntimeConfigTest {
 
     @Test
     void whenLocalVariableIsCreatedToEnvironmentThatDoesNotExists_thenExceptionIsThrown() {
-        var config = new RuntimeConfig();
+        var config = new EnvironmentConfig();
         String environment = "Nonexistent";
         String variableName = "name";
         String variableValue = "value";
@@ -82,7 +82,7 @@ class RuntimeConfigTest {
 
     @Test
     void whenLocalVariableIsCreatedToEnvironment_thenItIsAddedToTheEnvironment() {
-        var config = new RuntimeConfig();
+        var config = new EnvironmentConfig();
         String environment = "test";
         String variableName = "name";
         String variableValue = "value";
@@ -100,7 +100,7 @@ class RuntimeConfigTest {
 
     @Test
     void whenIsLocalVariableDeleted_thenAccessingItReturnsNull() {
-        var config = new RuntimeConfig();
+        var config = new EnvironmentConfig();
         String environment = "test";
         String variableName = "name";
         String variableValue = "value";
@@ -125,7 +125,7 @@ class RuntimeConfigTest {
 
     @Test
     void whenIsLocalVariableAccessedInEnvironmentThatDoesNotExist_thenExceptionIsThrown() {
-        var config = new RuntimeConfig();
+        var config = new EnvironmentConfig();
         String environment = "nonexistent";
         String variableName = "name";
 
@@ -139,7 +139,7 @@ class RuntimeConfigTest {
 
     @Test
     void whenGlobalVariableIsCreated_thenItIsAddedToConfig() {
-        var config = new RuntimeConfig();
+        var config = new EnvironmentConfig();
         String variableName = "name";
         String variableValue = "value";
 
@@ -154,7 +154,7 @@ class RuntimeConfigTest {
 
     @Test
     void whenGlobalVariableIsDeleted_thenAccessingItReturnsNull() {
-        var config = new RuntimeConfig();
+        var config = new EnvironmentConfig();
         String variableName = "name";
         String variableValue = "value";
 
@@ -176,7 +176,7 @@ class RuntimeConfigTest {
 
     @Test
     void gettingAllGlobalVariablesShouldReturnThem() {
-        var config = new RuntimeConfig();
+        var config = new EnvironmentConfig();
         String variableName1 = "name1";
         String variableValue1 = "value1";
 
@@ -198,7 +198,7 @@ class RuntimeConfigTest {
 
     @Test
     void gettingAllLocalVariablesInEnvironmentShouldReturnThem() {
-        var config = new RuntimeConfig();
+        var config = new EnvironmentConfig();
         String environment = "env";
         String variableName1 = "name1";
         String variableValue1 = "value1";
@@ -223,7 +223,7 @@ class RuntimeConfigTest {
 
     @Test
     void settingScriptWorks() {
-        var config = new RuntimeConfig();
+        var config = new EnvironmentConfig();
         String environment = "env";
         String script = "script";
 
@@ -239,7 +239,7 @@ class RuntimeConfigTest {
 
     @Test
     void whenGettingScriptThatDoesNotExist_thenExcept() {
-        var config = new RuntimeConfig();
+        var config = new EnvironmentConfig();
         String environment = "env";
 
         Assertions.assertNull(

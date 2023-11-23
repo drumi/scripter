@@ -8,8 +8,8 @@ import com.andreyprodromov.parsers.DefaultParser;
 import com.andreyprodromov.parsers.Parser;
 import com.andreyprodromov.platform.DefaultExecutor;
 import com.andreyprodromov.platform.Executor;
-import com.andreyprodromov.runtime.loaders.DefaultRuntimeConfigManager;
-import com.andreyprodromov.runtime.loaders.RuntimeConfigManager;
+import com.andreyprodromov.runtime.loaders.DefaultEnvironmentConfigLoader;
+import com.andreyprodromov.runtime.loaders.EnvironmentConfigLoader;
 
 import java.io.OutputStream;
 import java.nio.file.Path;
@@ -27,12 +27,12 @@ public class App {
     public static void main(String[] args) {
 
         // Wire up dependencies
-        RuntimeConfigManager runtimeConfigManager = new DefaultRuntimeConfigManager(DEFAULT_FOLDER);
-        Parser parser = new DefaultParser(PREFIX, SUFFIX, runtimeConfigManager);
+        EnvironmentConfigLoader environmentConfigLoader = new DefaultEnvironmentConfigLoader(DEFAULT_FOLDER);
+        Parser parser = new DefaultParser(PREFIX, SUFFIX, environmentConfigLoader);
         OutputStream outputStream = System.out;
         Executor executor = new DefaultExecutor();
 
-        CommandFactory commandFactory = new DefaultCommandFactory(runtimeConfigManager, parser, outputStream, executor);
+        CommandFactory commandFactory = new DefaultCommandFactory(environmentConfigLoader, parser, outputStream, executor);
         Handler handler = new DefaultHandler(commandFactory);
 
         // Handle input

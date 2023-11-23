@@ -2,27 +2,27 @@ package com.andreyprodromov.parsers;
 
 import com.andreyprodromov.parsers.exceptions.ScriptDoesNotExistException;
 import com.andreyprodromov.parsers.exceptions.VariableIsNotSetException;
-import com.andreyprodromov.runtime.RuntimeConfig;
-import com.andreyprodromov.runtime.loaders.RuntimeConfigManager;
+import com.andreyprodromov.runtime.EnvironmentConfig;
+import com.andreyprodromov.runtime.loaders.EnvironmentConfigLoader;
 
 public class DefaultParser implements Parser {
 
     private final String variablePrefix;
     private final String variableSuffix;
-    private final RuntimeConfigManager runtimeConfigManager;
+    private final EnvironmentConfigLoader environmentConfigLoader;
 
     public DefaultParser(String variablePrefix, String variableSuffix,
-                         RuntimeConfigManager runtimeConfigManager) {
+                         EnvironmentConfigLoader environmentConfigLoader) {
         this.variablePrefix = variablePrefix;
         this.variableSuffix = variableSuffix;
-        this.runtimeConfigManager = runtimeConfigManager;
+        this.environmentConfigLoader = environmentConfigLoader;
     }
 
     @Override
     public String parse(String environment, String[] args) {
-        RuntimeConfig runtimeConfig = runtimeConfigManager.getConfig();
+        EnvironmentConfig environmentConfig = environmentConfigLoader.getConfig();
 
-        String script = runtimeConfig.getScript(environment);
+        String script = environmentConfig.getScript(environment);
 
         if (script == null)
             throw new ScriptDoesNotExistException(
@@ -31,7 +31,7 @@ public class DefaultParser implements Parser {
 
         script = putCommandlineArguments(script, args);
 
-        script = putEnvironmentVariables(script, environment, runtimeConfig);
+        script = putEnvironmentVariables(script, environment, environmentConfig);
 
         return script;
     }
@@ -52,7 +52,7 @@ public class DefaultParser implements Parser {
     }
 
 
-    private String putEnvironmentVariables(String script, String environment, RuntimeConfig config) {
+    private String putEnvironmentVariables(String script, String environment, EnvironmentConfig config) {
         int startIndex = script.indexOf(variablePrefix);
         int endIndex = script.indexOf(variableSuffix);
         while (startIndex != -1) {
@@ -72,7 +72,7 @@ public class DefaultParser implements Parser {
         return script;
     }
 
-    private String getVariable(String environment, String variableName, RuntimeConfig config) {
+    private String getVariable(String environment, String variableName, EnvironmentConfig config) {
         String localVariable = config.getLocalVariable(environment, variableName);
 
         if (localVariable != null)

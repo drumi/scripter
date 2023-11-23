@@ -1,35 +1,35 @@
 package com.andreyprodromov.runtime.loaders;
 
+import com.andreyprodromov.runtime.EnvironmentConfig;
 import com.google.gson.Gson;
-import com.andreyprodromov.runtime.RuntimeConfig;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class DefaultRuntimeConfigManager implements RuntimeConfigManager {
+public class DefaultEnvironmentConfigLoader implements EnvironmentConfigLoader {
 
     private static final Gson GSON = new Gson();
 
     private final Path folderPath;
     private final Path filePath;
 
-    private RuntimeConfig runtimeConfig;
+    private EnvironmentConfig environmentConfig;
 
-    public DefaultRuntimeConfigManager(Path folderPath) {
+    public DefaultEnvironmentConfigLoader(Path folderPath) {
         this.folderPath = folderPath;
         this.filePath = folderPath.resolve("config");
     }
 
     @Override
-    public RuntimeConfig getConfig() {
-        if (runtimeConfig == null)
-            runtimeConfig = loadConfig();
+    public EnvironmentConfig getConfig() {
+        if (environmentConfig == null)
+            environmentConfig = loadConfig();
 
-        return runtimeConfig;
+        return environmentConfig;
     }
 
-    private RuntimeConfig loadConfig() {
+    private EnvironmentConfig loadConfig() {
         try {
             if (!Files.exists(filePath)) {
                 Files.createDirectories(folderPath);
@@ -37,7 +37,7 @@ public class DefaultRuntimeConfigManager implements RuntimeConfigManager {
             }
 
             String input = Files.readString(filePath);
-            return GSON.fromJson(input, RuntimeConfig.class);
+            return GSON.fromJson(input, EnvironmentConfig.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -46,7 +46,7 @@ public class DefaultRuntimeConfigManager implements RuntimeConfigManager {
     @Override
     public void saveConfig() {
         try {
-            Files.writeString(filePath, GSON.toJson(runtimeConfig));
+            Files.writeString(filePath, GSON.toJson(environmentConfig));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

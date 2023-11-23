@@ -1,16 +1,14 @@
 package com.andreyprodromov.parsers;
 
-import com.andreyprodromov.runtime.RuntimeConfig;
-import com.andreyprodromov.runtime.loaders.RuntimeConfigManager;
+import com.andreyprodromov.runtime.EnvironmentConfig;
+import com.andreyprodromov.runtime.loaders.EnvironmentConfigLoader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.AdditionalMatchers.*;
-import static org.mockito.ArgumentMatchers.*;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -29,8 +27,8 @@ class DefaultParserTest {
         String secondCommandLineArgumentValue = "two";
         String[] args = new String[]{ firstCommandLineArgumentValue, secondCommandLineArgumentValue };
 
-        var configRunnerMock = mock(RuntimeConfigManager.class);
-        var configMock = mock(RuntimeConfig.class);
+        var configRunnerMock = mock(EnvironmentConfigLoader.class);
+        var configMock = mock(EnvironmentConfig.class);
 
         when(configRunnerMock.getConfig()).thenReturn(configMock);
         when(configMock.getGlobalVariable("globalVar")).thenReturn(globalVarValue);
@@ -61,8 +59,8 @@ class DefaultParserTest {
         String[] args = new String[]{};
 
 
-        var configRunnerMock = mock(RuntimeConfigManager.class);
-        var configMock = mock(RuntimeConfig.class);
+        var configRunnerMock = mock(EnvironmentConfigLoader.class);
+        var configMock = mock(EnvironmentConfig.class);
 
         when(configRunnerMock.getConfig()).thenReturn(configMock);
         lenient().when(configMock.getGlobalVariable("shadowVar")).thenReturn(globalVarValue);
