@@ -6,9 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-class Environment {
-
-    private static final Map<String, String> globalVariables = new HashMap<>();
+public class Environment {
 
     private final Map<String, String> localVariables = new HashMap<>();
     private final String name;
@@ -47,23 +45,6 @@ class Environment {
 
     public void deleteScript() {
         this.script = null;
-    }
-
-    public static Map<String, String> getAllGlobalVariables() {
-        return Collections.unmodifiableMap(globalVariables);
-    }
-
-    @Nullable
-    public static String getGlobalVariable(String name) {
-        return globalVariables.get(name);
-    }
-
-    public static void setGlobalVariable(String name, String value) {
-        globalVariables.put(name, value);
-    }
-
-    public static void deleteGlobalVariable(String name) {
-        globalVariables.remove(name);
     }
 
 }

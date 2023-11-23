@@ -4,6 +4,7 @@ import com.andreyprodromov.runtime.exceptions.EnvironmentAlreadyExistsException;
 import com.andreyprodromov.runtime.exceptions.EnvironmentDoesNotExistException;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -11,6 +12,7 @@ import java.util.Set;
 public class EnvironmentConfig {
 
     private final Map<String, Environment> environments = new HashMap<>();
+    private final Map<String, String> globalVariables = new HashMap<>();
 
     public void createEnvironment(String environmentName) {
         if (environments.get(environmentName) != null)
@@ -31,7 +33,7 @@ public class EnvironmentConfig {
     }
 
     public void deleteGlobalVariable(String name) {
-        Environment.deleteGlobalVariable(name);
+       globalVariables.remove(name);
     }
 
     public Set<String> getEnvironments() {
@@ -39,7 +41,7 @@ public class EnvironmentConfig {
     }
 
     public void setGlobalVariable(String name, String value) {
-        Environment.setGlobalVariable(name, value);
+        globalVariables.put(name, value);
     }
 
     public void setLocalVariable(String environmentName, String variableName, String value) {
@@ -57,11 +59,11 @@ public class EnvironmentConfig {
 
     @Nullable
     public String getGlobalVariable(String variableName) {
-        return Environment.getGlobalVariable(variableName);
+        return globalVariables.get(variableName);
     }
 
     public Map<String, String> getAllGlobalVariables() {
-        return Environment.getAllGlobalVariables();
+        return Collections.unmodifiableMap(globalVariables);
     }
 
     public Map<String, String> getAllLocalVariables(String environmentName) {

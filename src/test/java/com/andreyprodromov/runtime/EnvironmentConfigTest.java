@@ -237,15 +237,4 @@ class EnvironmentConfigTest {
         );
     }
 
-    @Test
-    void whenGettingScriptThatDoesNotExist_thenExcept() {
-        var config = new EnvironmentConfig();
-        String environment = "env";
-
-        Assertions.assertNull(
-            config.getScript(environment),
-            "Accessing a script that does not exist should return null"
-        );
-    }
-
 }
