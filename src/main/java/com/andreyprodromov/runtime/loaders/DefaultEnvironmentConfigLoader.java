@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 public class DefaultEnvironmentConfigLoader implements EnvironmentConfigLoader {
 
@@ -13,11 +14,13 @@ public class DefaultEnvironmentConfigLoader implements EnvironmentConfigLoader {
 
     private final Path folderPath;
     private final Path filePath;
+    private final Path backupFilePath;
     private final EnvironmentConfig environmentConfig;
 
     public DefaultEnvironmentConfigLoader(Path folderPath) {
         this.folderPath = folderPath;
         this.filePath = folderPath.resolve("config");
+        this.backupFilePath = folderPath.resolve("config.bkup");
 
         if (!Files.exists(filePath)) {
             createDirectories();
@@ -53,6 +56,7 @@ public class DefaultEnvironmentConfigLoader implements EnvironmentConfigLoader {
     @Override
     public void saveConfig() {
         try {
+            Files.copy(filePath, backupFilePath, StandardCopyOption.REPLACE_EXISTING);
             Files.writeString(filePath, GSON.toJson(environmentConfig));
         } catch (IOException e) {
             throw new RuntimeException(e);
