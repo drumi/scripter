@@ -1,1 +1,1 @@
-mvn package
+./mvnw package
