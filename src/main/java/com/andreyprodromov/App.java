@@ -13,11 +13,11 @@ import com.andreyprodromov.runtime.loaders.EnvironmentConfigLoader;
 
 import java.io.OutputStream;
 import java.nio.file.Path;
+import java.util.regex.Pattern;
 
 public class App {
 
-    private static final String PREFIX = "%[";
-    private static final String SUFFIX = "]%";
+    private static final Pattern variablePattern = Pattern.compile("%\\[(\\S+)]%");
 
     private static final Path DEFAULT_FOLDER = Path.of(
         System.getProperty("user.home"),
@@ -28,7 +28,7 @@ public class App {
 
         // Wire up dependencies
         EnvironmentConfigLoader environmentConfigLoader = new DefaultEnvironmentConfigLoader(DEFAULT_FOLDER);
-        Parser parser = new DefaultParser(PREFIX, SUFFIX, environmentConfigLoader);
+        Parser parser = new DefaultParser(variablePattern, environmentConfigLoader);
         OutputStream outputStream = System.out;
         Executor executor = new DefaultExecutor();
 
