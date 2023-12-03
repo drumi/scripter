@@ -1,5 +1,10 @@
 package com.andreyprodromov.platform;
 
 public interface Executor {
-    void execute(String argument);
+
+    /**
+     * @param cmd the command to be executed in the current OS
+     */
+    void execute(String cmd);
+
 }

@@ -1,5 +1,10 @@
 package com.andreyprodromov.commands.exceptions;
 
+/**
+ * This should be thrown when a
+ * {@link com.andreyprodromov.commands.Command Command}
+ * is created with wrong number of arguments.
+ */
 public class ArgumentsMismatchException extends RuntimeException {
 
     public ArgumentsMismatchException() {
@@ -16,11 +21,6 @@ public class ArgumentsMismatchException extends RuntimeException {
 
     public ArgumentsMismatchException(Throwable cause) {
         super(cause);
-    }
-
-    protected ArgumentsMismatchException(String message, Throwable cause, boolean enableSuppression,
-                                         boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
     }
 
 }

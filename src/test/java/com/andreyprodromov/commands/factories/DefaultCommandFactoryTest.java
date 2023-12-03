@@ -17,6 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.mock;
@@ -44,49 +45,58 @@ class DefaultCommandFactoryTest {
     @Test
     void createHelpCommand() {
         List<String> names = List.of("-h", "--help");
-        check(names, HelpCommand.class);
+        check(names, List.of(), HelpCommand.class);
     }
 
     @Test
     void createCloneCommand() {
         List<String> names = List.of("-cl", "--clone");
-        check(names, CloneCommand.class);
+        List<String> arguments = List.of("env1", "env2");
+        check(names, arguments, CloneCommand.class);
     }
 
     @Test
     void createCreateCommand() {
         List<String> names = List.of("-c", "--create");
-        check(names, CreateCommand.class);
+        List<String> arguments = List.of("env");
+        check(names, arguments, CreateCommand.class);
     }
 
     @Test
     void createDeleteCommand() {
         List<String> names = List.of("-d", "--delete");
-        check(names, DeleteCommand.class);
+        List<String> arguments = List.of("-env", "env");
+        check(names, arguments, DeleteCommand.class);
     }
 
     @Test
     void createListCommand() {
         List<String> names = List.of("-l", "--list");
-        check(names, ListCommand.class);
+        List<String> arguments = List.of("-env");
+        check(names, arguments, ListCommand.class);
     }
 
     @Test
     void createExecuteCommand() {
         List<String> names = List.of("-e", "--execute");
-        check(names, ExecuteCommand.class);
+        List<String> arguments = List.of("env");
+        check(names, arguments, ExecuteCommand.class);
     }
 
     @Test
     void createModifyCommand() {
         List<String> names = List.of("-m", "--modify");
-        check(names, ModifyCommand.class);
+        List<String> arguments = List.of("-ss", "env", "script");
+        check(names, arguments, ModifyCommand.class);
     }
 
 
-    private void check(List<String> names, Class<?> clazz) {
+    private void check(List<String> names, List<String> arguments, Class<?> clazz) {
         for (var name : names) {
-            var args = new String[] { name };
+            List<String> tmp = new ArrayList<>(arguments);
+            tmp.add(0, name);
+            String[] args = tmp.toArray(String[]::new);
+
             Command command = factory.create(args);
 
             Assertions.assertInstanceOf(

@@ -15,6 +15,10 @@ import com.andreyprodromov.runtime.loaders.EnvironmentConfigLoader;
 
 import java.io.OutputStream;
 
+
+/**
+ * The default factory for creating objects implementing {@link com.andreyprodromov.commands.Command} interface.
+ */
 public class DefaultCommandFactory implements CommandFactory {
 
     private final EnvironmentConfigLoader environmentConfigLoader;
@@ -22,6 +26,13 @@ public class DefaultCommandFactory implements CommandFactory {
     private final OutputStream outputStream;
     private final Executor executor;
 
+    /**
+     * @param environmentConfigLoader the config loader responsible for loading/saving the required
+     *                                {@link com.andreyprodromov.runtime.EnvironmentConfig EnvironmentConfig}
+     * @param parser the parser used for parsing user scripts
+     * @param outputStream the output stream
+     * @param executor the environment executor
+     */
     public DefaultCommandFactory(EnvironmentConfigLoader environmentConfigLoader, Parser parser,
                                  OutputStream outputStream, Executor executor) {
         this.environmentConfigLoader = environmentConfigLoader;

@@ -60,13 +60,12 @@ class ModifyCommandTest {
     }
 
     @Test
-    void whenCalledWithWrongArgumentCount_thenExcept() {
+    void whenCreatedWithWrongArgumentCount_thenExcept() {
         String[] args = new String[] { "-m", "-ss", "env" };
-        var command = new ModifyCommand(args, manager);
 
         Assertions.assertThrows(
             ArgumentsMismatchException.class,
-            command::execute,
+            () -> new ModifyCommand(args, manager),
             "Command with mismatched arguments should throw exception on execution"
         );
     }

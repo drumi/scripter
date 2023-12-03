@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * The environment configuration. This includes all environments and global variables.
+ */
 public class EnvironmentConfig {
 
     private final Map<String, Environment> environments = new HashMap<>();

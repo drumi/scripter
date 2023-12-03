@@ -3,10 +3,16 @@ package com.andreyprodromov.commands;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
+/**
+ * Command for outputting help menu.
+ */
 public final class HelpCommand implements Command {
 
     private final PrintStream outputStream;
 
+    /**
+     * @param outputStream the output stream where the help menu will be written
+     */
     public HelpCommand(OutputStream outputStream) {
         this.outputStream = new PrintStream(outputStream);
     }

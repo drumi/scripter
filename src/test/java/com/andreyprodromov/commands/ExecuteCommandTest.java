@@ -3,7 +3,6 @@ package com.andreyprodromov.commands;
 import com.andreyprodromov.commands.exceptions.ArgumentsMismatchException;
 import com.andreyprodromov.parsers.Parser;
 import com.andreyprodromov.platform.Executor;
-import com.andreyprodromov.runtime.loaders.EnvironmentConfigLoader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +13,6 @@ import static org.mockito.Mockito.when;
 
 class ExecuteCommandTest {
 
-    EnvironmentConfigLoader manager = mock(EnvironmentConfigLoader.class);
     Parser parser = mock(Parser.class);
     Executor executor = mock(Executor.class);
 
@@ -32,13 +30,12 @@ class ExecuteCommandTest {
     }
 
     @Test
-    void whenCalledWithWrongArgumentCount_thenExcept() {
+    void whenCreatedWithWrongArgumentCount_thenExcept() {
         String[] args = new String[] { "-e" };
-        var command = new ExecuteCommand(args, parser, executor);
 
         Assertions.assertThrows(
             ArgumentsMismatchException.class,
-            command::execute,
+            () -> new ExecuteCommand(args, parser, executor),
             "Command with mismatched arguments should throw exception on execution"
         );
     }

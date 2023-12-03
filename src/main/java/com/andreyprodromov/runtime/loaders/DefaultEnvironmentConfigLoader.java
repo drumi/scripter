@@ -8,6 +8,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
+/**
+ * The default config loader.
+ * Provides save/load functionality for the user config.
+ */
 public class DefaultEnvironmentConfigLoader implements EnvironmentConfigLoader {
 
     private static final Gson GSON = new Gson();

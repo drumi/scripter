@@ -1,5 +1,10 @@
 package com.andreyprodromov.commands.exceptions;
 
+/**
+ * This should be thrown when
+ * {@link com.andreyprodromov.commands.factories.CommandFactory#create(String[]) CommandFactory.create(String[])}
+ * is called with a non-existent command.
+ */
 public class CommandDoesNotExistException extends RuntimeException {
 
     public CommandDoesNotExistException() {
@@ -16,11 +21,6 @@ public class CommandDoesNotExistException extends RuntimeException {
 
     public CommandDoesNotExistException(Throwable cause) {
         super(cause);
-    }
-
-    protected CommandDoesNotExistException(String message, Throwable cause, boolean enableSuppression,
-                                           boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
     }
 
 }

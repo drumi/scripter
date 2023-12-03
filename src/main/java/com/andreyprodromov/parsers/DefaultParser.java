@@ -8,6 +8,9 @@ import com.andreyprodromov.runtime.loaders.EnvironmentConfigLoader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The default parser for parsing scripts.
+ */
 public class DefaultParser implements Parser {
 
     private static final String POSITIVE_INTEGER_REGEX = "\\d+";

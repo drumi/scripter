@@ -6,15 +6,26 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * Data class representing an execution environment.
+ */
 public class Environment {
 
-    private final Map<String, String> localVariables = new HashMap<>();
     private final String name;
+    private final Map<String, String> localVariables = new HashMap<>();
 
     private String script;
 
+    /**
+     * @param name the name of the environment
+     */
     public Environment(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Map<String, String> getAllLocalVariables() {

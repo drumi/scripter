@@ -29,13 +29,12 @@ class CreateCommandTest {
     }
 
     @Test
-    void whenCalledWithWrongArgumentCount_thenExcept() {
+    void whenCreatedWithWrongArgumentCount_thenExcept() {
         String[] args = new String[] { "-c", "env", "another"};
-        var command = new CreateCommand(args, manager);
 
         Assertions.assertThrows(
             ArgumentsMismatchException.class,
-            command::execute,
+            () -> new CreateCommand(args, manager),
             "Command with mismatched arguments should throw exception on execution"
         );
     }

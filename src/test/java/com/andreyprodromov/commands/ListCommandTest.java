@@ -145,13 +145,12 @@ class ListCommandTest {
     }
 
     @Test
-    void whenCalledWithWrongArgumentCount_thenExcept() {
+    void whenCreatedWithWrongArgumentCount_thenExcept() {
         String[] args = new String[] { "-l" };
-        var command = new ListCommand(args, parser, manager, outputStream);
 
         Assertions.assertThrows(
             ArgumentsMismatchException.class,
-            command::execute,
+            () -> new ListCommand(args, parser, manager, outputStream),
             "Command with mismatched arguments should throw exception on execution"
         );
     }

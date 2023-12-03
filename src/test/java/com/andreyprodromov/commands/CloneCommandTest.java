@@ -43,14 +43,12 @@ class CloneCommandTest {
     }
 
     @Test
-    void whenCalledWithWrongArgumentCount_thenExcept() {
+    void whenCreatedWithWrongArgumentCount_thenExcept() {
         String[] args = new String[] { "-cl", "old-env"};
-        var command = new CloneCommand(args, manager);
-
 
         Assertions.assertThrows(
             ArgumentsMismatchException.class,
-            command::execute,
+            () -> new CloneCommand(args, manager),
             "Command with mismatched arguments should throw exception on execution"
         );
     }
