@@ -24,10 +24,15 @@ public class App {
         ".scripter"
     );
 
+    private static final String CONFIG_FILE_NAME = "config";
+
+    private static final int EXIT_FAILURE = -1;
+
     public static void main(String[] args) {
 
         // Wire up dependencies
-        EnvironmentConfigLoader environmentConfigLoader = new DefaultEnvironmentConfigLoader(DEFAULT_FOLDER);
+        EnvironmentConfigLoader environmentConfigLoader =
+            new DefaultEnvironmentConfigLoader(DEFAULT_FOLDER, CONFIG_FILE_NAME);
         Parser parser = new DefaultParser(variablePattern, environmentConfigLoader);
         OutputStream outputStream = System.out;
         Executor executor = new DefaultExecutor();
@@ -40,6 +45,7 @@ public class App {
             handler.handle(args);
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            System.exit(EXIT_FAILURE);
         }
     }
 }
