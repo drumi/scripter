@@ -12,10 +12,14 @@ public final class Util {
     }
 
     /**
-     * @param length the required length to check against
-     * @param args the arguments whose length is checked
+     * @param length
+     *        the required length to check against
      *
-     * @throws ArgumentsMismatchException when the {@code length} is not equal to {@code args.length}
+     * @param args
+     *        the arguments whose length is checked
+     *
+     * @throws ArgumentsMismatchException
+     *         when the {@code length} is not equal to {@code args.length}
      */
     public static void assertExactLength(int length, String... args) {
         if (args.length != length)
@@ -23,10 +27,14 @@ public final class Util {
     }
 
     /**
-     * @param length the required length to check against
-     * @param args the arguments whose length is checked
+     * @param length
+     *        the required length to check against
      *
-     * @throws ArgumentsMismatchException when the {@code length} is less than {@code args.length}
+     * @param args
+     *        the arguments whose length is checked
+     *
+     * @throws ArgumentsMismatchException
+     *         when the {@code length} is less than {@code args.length}
      */
     public static void assertMinimumLength(int length, String... args) {
         if (args.length < length)

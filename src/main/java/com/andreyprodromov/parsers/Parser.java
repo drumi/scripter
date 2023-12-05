@@ -3,8 +3,10 @@ package com.andreyprodromov.parsers;
 public interface Parser {
 
     /**
-     * @param environment the environment name where the script is located
-     * @param args positional arguments that should be taken into consideration when parsing
+     * @param environment
+     *        the environment name where the script is located
+     * @param args
+     *        positional arguments that should be taken into consideration when parsing
      *
      * @return the parsed script
      *

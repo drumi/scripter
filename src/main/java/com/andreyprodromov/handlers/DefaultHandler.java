@@ -10,7 +10,8 @@ public final class DefaultHandler implements Handler {
     private final CommandFactory commandFactory;
 
     /**
-     * @param commandFactory the factory used for {@link com.andreyprodromov.commands.Command Command} creation
+     * @param commandFactory
+     *        the factory used for {@link com.andreyprodromov.commands.Command Command} creation
      */
     public DefaultHandler(CommandFactory commandFactory) {
         this.commandFactory = commandFactory;

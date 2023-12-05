@@ -6,7 +6,8 @@ import com.andreyprodromov.commands.Command;
 public interface CommandFactory {
 
     /**
-     * @param args the arguments to be used for {@link com.andreyprodromov.commands.Command Command} creation
+     * @param args
+     *        the arguments to be used for {@link com.andreyprodromov.commands.Command Command} creation
      *
      * @return the corresponding {@code Command} created from the provided arguments
      *

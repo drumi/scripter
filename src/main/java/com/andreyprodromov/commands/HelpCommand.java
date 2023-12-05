@@ -11,7 +11,8 @@ public final class HelpCommand implements Command {
     private final PrintStream outputStream;
 
     /**
-     * @param outputStream the output stream where the help menu will be written
+     * @param outputStream
+     *        the output stream where the help menu will be written
      */
     public HelpCommand(OutputStream outputStream) {
         this.outputStream = new PrintStream(outputStream);

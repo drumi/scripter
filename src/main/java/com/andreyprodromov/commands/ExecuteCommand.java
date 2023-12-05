@@ -20,10 +20,17 @@ public final class ExecuteCommand implements Command {
     private final Executor executor;
 
     /**
-     * @param args the arguments of the command
-     * @param parser the parser used for parsing user scripts
-     * @param executor the environment executor
-     * @throws com.andreyprodromov.commands.exceptions.ArgumentsMismatchException when created with wrong number of arguments
+     * @param args
+     *        the arguments of the command
+     *
+     * @param parser
+     *        the parser used for parsing user scripts
+     *
+     * @param executor
+     *        the environment executor
+     *
+     * @throws com.andreyprodromov.commands.exceptions.ArgumentsMismatchException
+     *         when created with wrong number of arguments
      */
     public ExecuteCommand(String[] args, Parser parser, Executor executor) {
         this.args = args;

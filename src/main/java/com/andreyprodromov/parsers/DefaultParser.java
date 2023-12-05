@@ -9,7 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * The default parser for parsing scripts.
+ * The default parser for scripts.
  */
 public class DefaultParser implements Parser {
 
@@ -20,11 +20,13 @@ public class DefaultParser implements Parser {
     private final EnvironmentConfigLoader environmentConfigLoader;
 
     /**
-     * @param variablePattern the pattern to be matched against.
-     *                        Must contain exactly one capture group,
-     *                        which is used to get the variable name
+     * @param variablePattern
+     *        the pattern to be matched against.
+     *        Must contain exactly one capture group,
+     *        which is used to get the variable name
      *
-     * @param environmentConfigLoader the environment config loader
+     * @param environmentConfigLoader
+     *        the environment config loader
      */
     public DefaultParser(Pattern variablePattern, EnvironmentConfigLoader environmentConfigLoader) {
        this.variablePattern = variablePattern;

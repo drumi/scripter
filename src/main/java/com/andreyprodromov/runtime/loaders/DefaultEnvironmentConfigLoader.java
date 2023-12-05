@@ -28,6 +28,13 @@ public class DefaultEnvironmentConfigLoader implements EnvironmentConfigLoader, 
 
     private final RandomAccessFile configFile;
 
+    /**
+     * @param folderPath
+     *        the folder path where the config file will be created
+     *
+     * @param fileName
+     *        the name of the config file
+     */
     public DefaultEnvironmentConfigLoader(Path folderPath, String fileName) {
         this.folderPath = folderPath;
         this.filePath = folderPath.resolve(fileName);

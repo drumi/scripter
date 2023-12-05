@@ -18,7 +18,8 @@ public class Environment {
     private String script;
 
     /**
-     * @param name the name of the environment
+     * @param name
+     *        the name of the environment
      */
     public Environment(String name) {
         this.name = name;

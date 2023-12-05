@@ -17,7 +17,8 @@ import java.io.OutputStream;
 
 
 /**
- * The default factory for creating objects implementing {@link com.andreyprodromov.commands.Command} interface.
+ * The default factory for creating objects implementing
+ * {@link com.andreyprodromov.commands.Command} interface.
  */
 public class DefaultCommandFactory implements CommandFactory {
 
@@ -27,11 +28,18 @@ public class DefaultCommandFactory implements CommandFactory {
     private final Executor executor;
 
     /**
-     * @param environmentConfigLoader the config loader responsible for loading/saving the required
-     *                                {@link com.andreyprodromov.runtime.EnvironmentConfig EnvironmentConfig}
-     * @param parser the parser used for parsing user scripts
-     * @param outputStream the output stream
-     * @param executor the environment executor
+     * @param environmentConfigLoader
+     *        the config loader responsible for loading/saving the required
+     *        {@link com.andreyprodromov.runtime.EnvironmentConfig EnvironmentConfig}
+     *
+     * @param parser
+     *        the parser used for parsing user scripts
+     *
+     * @param outputStream
+     *        the output stream
+     *
+     * @param executor
+     *        the environment executor
      */
     public DefaultCommandFactory(EnvironmentConfigLoader environmentConfigLoader, Parser parser,
                                  OutputStream outputStream, Executor executor) {

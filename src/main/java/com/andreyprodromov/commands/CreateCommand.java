@@ -15,11 +15,15 @@ public final class CreateCommand implements Command {
     private final EnvironmentConfigLoader environmentConfigLoader;
 
     /**
-     * @param args the arguments of the command
-     * @param environmentConfigLoader the config loader responsible for loading/saving the required
-     *                                {@link com.andreyprodromov.runtime.EnvironmentConfig EnvironmentConfig}
+     * @param args
+     *        the arguments of the command
      *
-     * @throws com.andreyprodromov.commands.exceptions.ArgumentsMismatchException when created with wrong number of arguments
+     * @param environmentConfigLoader
+     *        the config loader responsible for loading/saving the required
+     *        {@link com.andreyprodromov.runtime.EnvironmentConfig EnvironmentConfig}
+     *
+     * @throws com.andreyprodromov.commands.exceptions.ArgumentsMismatchException
+     *         when created with wrong number of arguments
      */
     public CreateCommand(String[] args, EnvironmentConfigLoader environmentConfigLoader) {
         this.args = args;

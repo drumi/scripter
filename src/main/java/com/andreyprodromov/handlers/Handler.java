@@ -4,7 +4,8 @@ package com.andreyprodromov.handlers;
 public interface Handler {
 
     /**
-     * @param args the arguments to handle
+     * @param args
+     *        the arguments to handle
      */
     void handle(String[] args);
 

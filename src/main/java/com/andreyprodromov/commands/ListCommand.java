@@ -32,13 +32,21 @@ public final class ListCommand implements Command {
     private final PrintStream outputStream;
 
     /**
-     * @param args the arguments of the command
-     * @param parser the parser used for parsing user scripts
-     * @param environmentConfigLoader the config loader responsible for loading/saving the required
-     *                                {@link com.andreyprodromov.runtime.EnvironmentConfig EnvironmentConfig}
-     * @param outputStream the output stream
+     * @param args
+     *        the arguments of the command
      *
-     * @throws com.andreyprodromov.commands.exceptions.ArgumentsMismatchException when created with wrong number of arguments
+     * @param parser
+     *        the parser used for parsing user scripts
+     *
+     * @param environmentConfigLoader
+     *        the config loader responsible for loading/saving the required
+     *        {@link com.andreyprodromov.runtime.EnvironmentConfig EnvironmentConfig}
+     *
+     * @param outputStream
+     *        the output stream
+     *
+     * @throws com.andreyprodromov.commands.exceptions.ArgumentsMismatchException
+     *         when created with wrong number of arguments
      */
     public ListCommand(String[] args, Parser parser, EnvironmentConfigLoader environmentConfigLoader, OutputStream outputStream) {
         this.args = args;
