@@ -37,7 +37,7 @@ scripter -h, --help
 ```
 
 ## Example Usage
-```
+```cmd
 scripter -c media
 scripter -m -sgv player "C:\misc\MediaPlayer.exe"
 scripter -m -ss media script.txt
@@ -45,7 +45,7 @@ scripter -e media song.mp3
 ```
 
 ## Example Script
-```
+```cmd
 %[player]% play --high-quality %[1]% &&
 %[tracker]% --register --no-remove %[1]% &&
 %[manager]% --change-stream %[music-stream]%
