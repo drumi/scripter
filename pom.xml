@@ -117,7 +117,7 @@
                     <configuration>
                         <archive>
                             <manifest>
-                                <mainClass>com.andreyprodromov.App</mainClass>
+                                <mainClass>com.andreyprodromov.scripter.App</mainClass>
                             </manifest>
                         </archive>
                         <descriptorRefs>
@@ -152,7 +152,7 @@
                                 <headerType>console</headerType>
                                 <jar>${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar</jar>
                                 <classPath>
-                                    <mainClass>com.andreyprodromov.App</mainClass>
+                                    <mainClass>com.andreyprodromov.scripter.App</mainClass>
                                     <addDependencies>true</addDependencies>
                                 </classPath>
                                 <jre>
