@@ -8,24 +8,22 @@ import java.util.Objects;
  */
 public final class DefaultExecutor implements Executor {
 
+    private static final String DELIMITER_REGEX = "\\s+";
+
     @Override
     public int execute(String cmd) {
         Objects.requireNonNull(cmd, "cmd must not be null");
 
-        int status;
-
         try {
-            ProcessBuilder builder = new ProcessBuilder(cmd);
+            ProcessBuilder builder = new ProcessBuilder(cmd.split(DELIMITER_REGEX));
             Process process = builder.start();
 
             process.waitFor();
 
-            status = process.exitValue();
+            return process.exitValue();
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
-
-        return status;
     }
 
 }
