@@ -6,7 +6,9 @@ public interface Handler {
     /**
      * @param args
      *        the arguments to handle
+     *
+     * @return status code after handling user input. A zero value means success
      */
-    void handle(String[] args);
+    int handle(String[] args);
 
 }

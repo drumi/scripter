@@ -9,7 +9,6 @@ import com.andreyprodromov.scripter.parsers.Parser;
 import com.andreyprodromov.scripter.platform.DefaultExecutor;
 import com.andreyprodromov.scripter.platform.Executor;
 import com.andreyprodromov.scripter.runtime.loaders.DefaultEnvironmentConfigLoader;
-import com.andreyprodromov.scripter.runtime.loaders.EnvironmentConfigLoader;
 
 import java.io.OutputStream;
 import java.nio.file.Path;
@@ -29,23 +28,27 @@ public final class App {
     private static final int EXIT_FAILURE = -1;
 
     public static void main(String[] args) {
+        int exitStatus;
 
         // Wire up dependencies
-        EnvironmentConfigLoader environmentConfigLoader =
-            new DefaultEnvironmentConfigLoader(DEFAULT_FOLDER, CONFIG_FILE_NAME);
-        Parser parser = new DefaultParser(variablePattern, environmentConfigLoader);
-        OutputStream outputStream = System.out;
-        Executor executor = new DefaultExecutor();
+        try (var environmentConfigLoader = new DefaultEnvironmentConfigLoader(DEFAULT_FOLDER, CONFIG_FILE_NAME)) {
 
-        CommandFactory commandFactory = new DefaultCommandFactory(environmentConfigLoader, parser, outputStream, executor);
-        Handler handler = new DefaultHandler(commandFactory);
+            Parser parser = new DefaultParser(variablePattern, environmentConfigLoader);
+            OutputStream outputStream = System.out;
+            Executor executor = new DefaultExecutor();
 
-        // Handle input
-        try {
-            handler.handle(args);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.exit(EXIT_FAILURE);
+            CommandFactory commandFactory = new DefaultCommandFactory(environmentConfigLoader, parser, outputStream, executor);
+            Handler handler = new DefaultHandler(commandFactory);
+
+            // Handle input
+            try {
+                exitStatus = handler.handle(args);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                exitStatus = EXIT_FAILURE;
+            }
         }
+
+        System.exit(exitStatus);
     }
 }

@@ -43,13 +43,13 @@ public final class ExecuteCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public int execute() {
         String environmentName = args[ENVIRONMENT_NAME_INDEX];
         String parsedScript = parser.parse(
             environmentName, Arrays.copyOfRange(args, ENVIRONMENT_NAME_INDEX + 1, args.length)
         );
 
-        executor.execute(parsedScript);
+        return executor.execute(parsedScript);
     }
 
 }

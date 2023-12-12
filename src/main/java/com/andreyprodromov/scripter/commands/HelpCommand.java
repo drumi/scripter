@@ -9,6 +9,8 @@ import java.util.Objects;
  */
 public final class HelpCommand implements Command {
 
+    private static final int EXECUTION_SUCCESS = 0;
+
     private final PrintStream outputStream;
 
     /**
@@ -21,7 +23,7 @@ public final class HelpCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public int execute() {
         outputStream.println(
             """
             scripter -c, --create <env>
@@ -58,6 +60,8 @@ public final class HelpCommand implements Command {
                 Lists help menu
             """
         );
+
+        return EXECUTION_SUCCESS;
     }
 
 }

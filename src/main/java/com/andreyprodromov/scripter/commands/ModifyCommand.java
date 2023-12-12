@@ -14,6 +14,8 @@ import java.util.Objects;
  */
 public final class ModifyCommand implements Command {
 
+    private static final int EXECUTION_SUCCESS = 0;
+
     private static final int MODIFICATION_TYPE_INDEX = 1;
 
     private static final int EXPECTED_ARGS_MINIMUM_LENGTH = 4;
@@ -59,15 +61,14 @@ public final class ModifyCommand implements Command {
             case "-ss", "--set-script" ->
                 Util.assertExactLength(SET_SCRIPT_OPTION_EXPECTED_ARGS_LENGTH, args);
 
-            default ->
-                throw new CommandOptionDoesNotExistException(
-                    "\"%s\" is not an existing option for --modify command".formatted(commandType)
-                );
+            default -> throw new CommandOptionDoesNotExistException(
+                "\"%s\" is not an existing option for --modify command".formatted(commandType)
+            );
         }
     }
 
     @Override
-    public void execute() {
+    public int execute() {
         String command = args[MODIFICATION_TYPE_INDEX];
         var config = environmentConfigLoader.getConfig();
 
@@ -109,6 +110,8 @@ public final class ModifyCommand implements Command {
         }
 
         environmentConfigLoader.saveConfig();
+
+        return EXECUTION_SUCCESS;
     }
 
 }

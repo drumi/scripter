@@ -18,6 +18,8 @@ import java.util.Set;
  */
 public final class ListCommand implements Command {
 
+    private static final int EXECUTION_SUCCESS = 0;
+
     private static final int COMMAND_TYPE_INDEX = 1;
 
     private static final int EXPECTED_ARGS_MINIMUM_LENGTH = 2;
@@ -91,7 +93,7 @@ public final class ListCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public int execute() {
         Util.assertMinimumLength(EXPECTED_ARGS_MINIMUM_LENGTH, args);
 
         EnvironmentConfig config = environmentConfigLoader.getConfig();
@@ -144,6 +146,8 @@ public final class ListCommand implements Command {
                 outputStream.printf("Parsed script for \"%s\":%n%s%n", environmentName, script);
             }
         }
+
+        return EXECUTION_SUCCESS;
     }
 
 }

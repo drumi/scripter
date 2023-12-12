@@ -20,9 +20,8 @@ public final class DefaultHandler implements Handler {
     }
 
     @Override
-    public void handle(String[] args) {
-        commandFactory.create(args)
-                      .execute();
+    public int handle(String[] args) {
+        return commandFactory.create(args).execute();
     }
 
 }

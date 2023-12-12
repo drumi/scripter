@@ -45,9 +45,6 @@ public final class DefaultEnvironmentConfigLoader implements EnvironmentConfigLo
         createDirectories(folderPath);
 
         this.configFile = openAndLockFile();
-
-        createBackup();
-
         this.environmentConfig = loadConfig();
     }
 
@@ -76,6 +73,8 @@ public final class DefaultEnvironmentConfigLoader implements EnvironmentConfigLo
 
     @Override
     public void saveConfig() {
+        createBackup();
+
         try {
             byte[] jsonBytes = GSON.toJson(environmentConfig).getBytes();
 
@@ -125,7 +124,11 @@ public final class DefaultEnvironmentConfigLoader implements EnvironmentConfigLo
     }
 
     @Override
-    public void close() throws Exception {
-        configFile.close();
+    public void close()  {
+        try {
+            configFile.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

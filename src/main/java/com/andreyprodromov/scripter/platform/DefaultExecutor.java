@@ -9,14 +9,23 @@ import java.util.Objects;
 public final class DefaultExecutor implements Executor {
 
     @Override
-    public void execute(String cmd) {
+    public int execute(String cmd) {
         Objects.requireNonNull(cmd, "cmd must not be null");
 
+        int status;
+
         try {
-            Runtime.getRuntime().exec(cmd);
-        } catch (IOException e) {
+            ProcessBuilder builder = new ProcessBuilder(cmd);
+            Process process = builder.start();
+
+            process.waitFor();
+
+            status = process.exitValue();
+        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
+
+        return status;
     }
 
 }

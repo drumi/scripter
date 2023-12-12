@@ -11,6 +11,8 @@ import java.util.Objects;
  */
 public final class DeleteCommand implements Command {
 
+    private static final int EXECUTION_SUCCESS = 0;
+
     private static final int DELETION_TYPE_INDEX = 1;
 
     private static final int EXPECTED_ARGS_MINIMUM_LENGTH = 3;
@@ -61,15 +63,14 @@ public final class DeleteCommand implements Command {
             case "-env", "--environment" ->
                 Util.assertExactLength(ENVIRONMENT_OPTION_EXPECTED_ARGS_LENGTH, args);
 
-            default ->
-                throw new CommandOptionDoesNotExistException(
-                    "\"%s\" is not an existing option for --delete command".formatted(commandType)
-                );
+            default -> throw new CommandOptionDoesNotExistException(
+                "\"%s\" is not an existing option for --modify command".formatted(commandType)
+            );
         }
     }
 
     @Override
-    public void execute() {
+    public int execute() {
         String commandType = args[DELETION_TYPE_INDEX];
         var config = environmentConfigLoader.getConfig();
 
@@ -94,6 +95,8 @@ public final class DeleteCommand implements Command {
         }
 
         environmentConfigLoader.saveConfig();
+
+        return EXECUTION_SUCCESS;
     }
 
 }

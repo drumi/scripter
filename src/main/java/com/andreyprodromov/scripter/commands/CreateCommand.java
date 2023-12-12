@@ -10,6 +10,8 @@ import java.util.Objects;
  */
 public final class CreateCommand implements Command {
 
+    private static final int EXECUTION_SUCCESS = 0;
+
     private static final int ENVIRONMENT_NAME_INDEX = 1;
     private static final int ARGS_EXPECTED_LENGTH = 2;
 
@@ -37,11 +39,13 @@ public final class CreateCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public int execute() {
         environmentConfigLoader.getConfig()
                                .createEnvironment(args[ENVIRONMENT_NAME_INDEX]);
 
         environmentConfigLoader.saveConfig();
+
+        return EXECUTION_SUCCESS;
     }
 
 }

@@ -11,6 +11,8 @@ import java.util.Objects;
  */
 public final class CloneCommand implements Command {
 
+    private static final int EXECUTION_SUCCESS = 0;
+
     private static final int ORIGINAL_ENVIRONMENT_NAME_INDEX = 1;
     private static final int CLONED_ENVIRONMENT_NAME_INDEX = 2;
 
@@ -40,7 +42,7 @@ public final class CloneCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public int execute() {
         String originalEnvironment = args[ORIGINAL_ENVIRONMENT_NAME_INDEX];
         String clonedEnvironment = args[CLONED_ENVIRONMENT_NAME_INDEX];
 
@@ -55,6 +57,8 @@ public final class CloneCommand implements Command {
               .ifPresent(script -> config.setScript(clonedEnvironment, script));
 
         environmentConfigLoader.saveConfig();
+
+        return EXECUTION_SUCCESS;
     }
 
 }
