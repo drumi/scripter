@@ -65,7 +65,10 @@ public final class DefaultParser implements Parser {
                 matcher.appendReplacement(sb, argument);
             } else {
                 String value = getVariable(environment, variableName, environmentConfig);
-                matcher.appendReplacement(sb, value);
+                matcher.appendReplacement(
+                    sb,
+                    Matcher.quoteReplacement(value)
+                );
             }
         }
 

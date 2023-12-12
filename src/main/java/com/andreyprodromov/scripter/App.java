@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 
 public final class App {
 
-    private static final Pattern variablePattern = Pattern.compile("%\\[(\\S+)]%");
+    private static final Pattern variablePattern = Pattern.compile("%\\[(\\S+?)]%");
 
     private static final Path DEFAULT_FOLDER = Path.of(
         System.getProperty("user.home"),

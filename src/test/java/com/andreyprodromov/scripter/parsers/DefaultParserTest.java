@@ -17,7 +17,7 @@ import static org.mockito.AdditionalMatchers.*;
 @ExtendWith(MockitoExtension.class)
 class DefaultParserTest {
 
-    private static final Pattern variablePattern = Pattern.compile("%\\[(\\S+)]%");
+    private static final Pattern variablePattern = Pattern.compile("%\\[(\\S+?)]%");
 
     @Test
     void parsingGeneralScript() {
