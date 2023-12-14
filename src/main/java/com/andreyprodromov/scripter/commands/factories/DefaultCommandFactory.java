@@ -8,6 +8,7 @@ import com.andreyprodromov.scripter.commands.ExecuteCommand;
 import com.andreyprodromov.scripter.commands.HelpCommand;
 import com.andreyprodromov.scripter.commands.ListCommand;
 import com.andreyprodromov.scripter.commands.ModifyCommand;
+import com.andreyprodromov.scripter.commands.VersionCommand;
 import com.andreyprodromov.scripter.commands.exceptions.CommandDoesNotExistException;
 import com.andreyprodromov.scripter.commands.utils.Util;
 import com.andreyprodromov.scripter.parsers.Parser;
@@ -69,6 +70,7 @@ public final class DefaultCommandFactory implements CommandFactory {
             case "-d", "--delete" -> new DeleteCommand(args, environmentConfigLoader);
             case "-m", "--modify" -> new ModifyCommand(args, environmentConfigLoader);
             case "-h", "--help" -> new HelpCommand(outputStream);
+            case "-v", "--version" -> new VersionCommand(outputStream);
             default -> throw new CommandDoesNotExistException(
                 "\"%s\" is not an existing command".formatted(command)
             );

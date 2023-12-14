@@ -8,6 +8,7 @@ import com.andreyprodromov.scripter.commands.ExecuteCommand;
 import com.andreyprodromov.scripter.commands.HelpCommand;
 import com.andreyprodromov.scripter.commands.ListCommand;
 import com.andreyprodromov.scripter.commands.ModifyCommand;
+import com.andreyprodromov.scripter.commands.VersionCommand;
 import com.andreyprodromov.scripter.parsers.Parser;
 import com.andreyprodromov.scripter.platform.Executor;
 import com.andreyprodromov.scripter.runtime.loaders.EnvironmentConfigLoader;
@@ -46,6 +47,12 @@ class DefaultCommandFactoryTest {
     void createHelpCommand() {
         List<String> names = List.of("-h", "--help");
         check(names, List.of(), HelpCommand.class);
+    }
+
+    @Test
+    void createVersionCommand() {
+        List<String> names = List.of("-v", "--version");
+        check(names, List.of(), VersionCommand.class);
     }
 
     @Test

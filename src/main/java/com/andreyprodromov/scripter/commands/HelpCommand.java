@@ -55,6 +55,9 @@ public final class HelpCommand implements Command {
                     -slv, --set-local-variable <env> <var> <value>
                     -sgv, --set-global-variable <var> <value>
                     -ss,  --set-script <env> <file>
+                    
+            scripter -v, --version
+                Lists program's version
             
             scripter -h, --help
                 Lists help menu
